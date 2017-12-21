@@ -4,7 +4,7 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/appscode/kutil/tools/monitoring/api"
+	"github.com/appscode/kube-mon/api"
 	prom "github.com/coreos/prometheus-operator/pkg/client/monitoring/v1"
 	ecs "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"

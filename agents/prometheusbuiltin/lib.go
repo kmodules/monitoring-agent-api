@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	core_util "github.com/appscode/kutil/core/v1"
-	"github.com/appscode/kutil/tools/monitoring/api"
+	"github.com/appscode/kube-mon/api"
 	core "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

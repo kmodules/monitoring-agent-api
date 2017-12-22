@@ -36,7 +36,7 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 	}
 	old, err := agent.promClient.ServiceMonitors(metav1.NamespaceAll).List(metav1.ListOptions{
 		LabelSelector: labels.Set{
-			serviceKey: sp.GetNamespace() + "." + sp.ServiceName(),
+			serviceKey: sp.ServiceName() + "." + sp.GetNamespace(),
 		}.String(),
 	})
 

@@ -60,7 +60,7 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 	if new.Prometheus.Labels == nil {
 		new.Prometheus.Labels = map[string]string{}
 	}
-	new.Prometheus.Labels[serviceKey] = sp.GetNamespace() + "." + sp.ServiceName()
+	new.Prometheus.Labels[serviceKey] = sp.ServiceName() + "." + sp.GetNamespace()
 
 	actual, err := agent.promClient.ServiceMonitors(new.Prometheus.Namespace).Get(sp.ServiceMonitorName(), metav1.GetOptions{})
 	if kerr.IsNotFound(err) {

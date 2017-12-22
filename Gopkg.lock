@@ -23,7 +23,13 @@
   branch = "master"
   name = "github.com/appscode/kutil"
   packages = [".","core/v1","meta"]
-  revision = "6b7a96edf8d863e4a28bce427bbbc5abba5f31c0"
+  revision = "04124fd21c654188d7a11908d8c8af994a4cccef"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/appscode/mergo"
+  packages = ["."]
+  revision = "e3000cb3d28c72b837601cac94debd91032d19fe"
 
 [[projects]]
   branch = "master"
@@ -225,6 +231,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4d1f4f0b84623e711f2cf87fd5691940b712688652103e8b0f61f4282b5c0553"
+  inputs-digest = "79ae9647e836d38413c3faa0d3be56155ca6035877338c4947eebc9dd39d7017"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -23,7 +23,7 @@
   branch = "master"
   name = "github.com/appscode/kutil"
   packages = [".","core/v1","meta"]
-  revision = "04124fd21c654188d7a11908d8c8af994a4cccef"
+  revision = "3cb214ff259e38b1d287d3005b08242af3ab3afc"
 
 [[projects]]
   branch = "master"
@@ -35,7 +35,7 @@
   branch = "master"
   name = "github.com/coreos/prometheus-operator"
   packages = ["pkg/client/monitoring/v1"]
-  revision = "281d3e7d5c26e72ad66871cee503bc183c1bc6a1"
+  revision = "b6656b0537fbe6319596d01125696236e55c2437"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -108,6 +108,12 @@
   name = "github.com/google/btree"
   packages = ["."]
   revision = "316fb6d3f031ae8f4d457c6c5186b9e3ded70435"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/google/go-cmp"
+  packages = ["cmp","cmp/internal/diff","cmp/internal/function","cmp/internal/value"]
+  revision = "97a1ff3c48253a51c601f6e4420181273b6ca0ea"
 
 [[projects]]
   branch = "master"
@@ -186,7 +192,7 @@
   branch = "master"
   name = "golang.org/x/text"
   packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable","width"]
-  revision = "eb22672bea55af56d225d4e35405f4d2e9f062a0"
+  revision = "e19ae1496984b1c655b8044a65c0300a3c878dd3"
 
 [[projects]]
   name = "gopkg.in/inf.v0"
@@ -209,7 +215,7 @@
   branch = "master"
   name = "k8s.io/apiextensions-apiserver"
   packages = ["pkg/apis/apiextensions","pkg/apis/apiextensions/v1beta1","pkg/client/clientset/clientset/scheme","pkg/client/clientset/clientset/typed/apiextensions/v1beta1"]
-  revision = "20a63611e6173b98673742938961dd9ba5fb5b23"
+  revision = "cc6478d1f0cc11882137b67e8137d387e68ce63a"
 
 [[projects]]
   name = "k8s.io/apimachinery"

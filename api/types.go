@@ -6,7 +6,7 @@ type AgentType string
 
 const (
 	AgentKey   = "monitoring.appscode.com/agent"
-	ServiceKey = "monitoring.appscode.com/service-key"
+	ServiceKey = "monitoring.appscode.com/service"
 
 	AgentPrometheusBuiltin AgentType = "prometheus-builtin"
 	AgentCoreOSPrometheus  AgentType = "coreos-prometheus-operator"

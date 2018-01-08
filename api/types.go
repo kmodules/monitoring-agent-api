@@ -5,8 +5,8 @@ import "github.com/appscode/kutil"
 type AgentType string
 
 const (
-	AgentKey   = "monitoring.appscode.com/agent"
-	ServiceKey = "monitoring.appscode.com/service"
+	KeyAgent   = "monitoring.appscode.com/agent"
+	KeyService = "monitoring.appscode.com/service"
 
 	AgentPrometheusBuiltin AgentType = "prometheus-builtin"
 	AgentCoreOSPrometheus  AgentType = "coreos-prometheus-operator"

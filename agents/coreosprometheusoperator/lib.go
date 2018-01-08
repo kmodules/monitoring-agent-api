@@ -35,7 +35,7 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 	}
 	old, err := agent.promClient.ServiceMonitors(metav1.NamespaceAll).List(metav1.ListOptions{
 		LabelSelector: labels.Set{
-			api.ServiceKey: sp.ServiceName() + "." + sp.GetNamespace(),
+			api.KeyService: sp.ServiceName() + "." + sp.GetNamespace(),
 		}.String(),
 	})
 
@@ -59,7 +59,7 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 	if new.Prometheus.Labels == nil {
 		new.Prometheus.Labels = map[string]string{}
 	}
-	new.Prometheus.Labels[api.ServiceKey] = sp.ServiceName() + "." + sp.GetNamespace()
+	new.Prometheus.Labels[api.KeyService] = sp.ServiceName() + "." + sp.GetNamespace()
 
 	actual, err := agent.promClient.ServiceMonitors(new.Prometheus.Namespace).Get(sp.ServiceMonitorName(), metav1.GetOptions{})
 	if kerr.IsNotFound(err) {
@@ -155,7 +155,7 @@ func (agent *PrometheusCoreosOperator) Delete(sp api.StatsAccessor) (kutil.VerbT
 
 	old, err := agent.promClient.ServiceMonitors(metav1.NamespaceAll).List(metav1.ListOptions{
 		LabelSelector: labels.Set{
-			api.ServiceKey: sp.GetNamespace() + "." + sp.ServiceName(),
+			api.KeyService: sp.GetNamespace() + "." + sp.ServiceName(),
 		}.String(),
 	})
 	if err != nil && !kerr.IsNotFound(err) {

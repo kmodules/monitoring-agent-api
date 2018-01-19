@@ -17,13 +17,13 @@
   branch = "master"
   name = "github.com/appscode/go"
   packages = ["types"]
-  revision = "f08cee5a2aa53a1ab6d30e4ae11e381d1b265f81"
+  revision = "99dbf420807d9459b63d1d0bf702537bb7aa976f"
 
 [[projects]]
   branch = "master"
   name = "github.com/appscode/kutil"
   packages = [".","core/v1","meta"]
-  revision = "3cb214ff259e38b1d287d3005b08242af3ab3afc"
+  revision = "e5498017a554e4d6c848eaef0d2f29c4b59e31b9"
 
 [[projects]]
   branch = "master"
@@ -35,7 +35,7 @@
   branch = "master"
   name = "github.com/coreos/prometheus-operator"
   packages = ["pkg/client/monitoring/v1"]
-  revision = "b6656b0537fbe6319596d01125696236e55c2437"
+  revision = "1fb131970e93e35f37db3dbc2fbee66e35ca696f"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -46,8 +46,8 @@
 [[projects]]
   name = "github.com/emicklei/go-restful"
   packages = [".","log"]
-  revision = "5741799b275a3c4a5a9623a993576d7545cf7b5c"
-  version = "v2.4.0"
+  revision = "2dd44038f0b95ae693b266c5f87593b5d2fdd78d"
+  version = "v2.5.0"
 
 [[projects]]
   name = "github.com/emicklei/go-restful-swagger12"
@@ -83,7 +83,7 @@
   branch = "master"
   name = "github.com/go-openapi/swag"
   packages = ["."]
-  revision = "cf0bdb963811675a4d7e74901cefc7411a1df939"
+  revision = "84f4bee7c0a6db40e3166044c7983c1c32125429"
 
 [[projects]]
   name = "github.com/gogo/protobuf"
@@ -113,7 +113,7 @@
   branch = "master"
   name = "github.com/google/go-cmp"
   packages = ["cmp","cmp/internal/diff","cmp/internal/function","cmp/internal/value"]
-  revision = "97a1ff3c48253a51c601f6e4420181273b6ca0ea"
+  revision = "97aa668b73e764ccdd786bc3ccd2edffe621150e"
 
 [[projects]]
   branch = "master"
@@ -137,7 +137,7 @@
   branch = "master"
   name = "github.com/hashicorp/go-version"
   packages = ["."]
-  revision = "ac737305c16432f4c660c6fc68cdcda4b5a0b5ae"
+  revision = "53932f80ddea12bea96be074f9fb2dc545806aba"
   source = "https://github.com/appscode/go-version.git"
 
 [[projects]]
@@ -186,7 +186,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["http2","http2/hpack","idna","lex/httplex"]
-  revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
+  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
 
 [[projects]]
   branch = "master"
@@ -204,7 +204,7 @@
   branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "287cf08546ab5e7e37d55a84f7ed3fd1db036de5"
+  revision = "d670f9405373e636a5a2765eea47fac0c9bc91a4"
 
 [[projects]]
   name = "k8s.io/api"
@@ -215,7 +215,7 @@
   branch = "master"
   name = "k8s.io/apiextensions-apiserver"
   packages = ["pkg/apis/apiextensions","pkg/apis/apiextensions/v1beta1","pkg/client/clientset/clientset/scheme","pkg/client/clientset/clientset/typed/apiextensions/v1beta1"]
-  revision = "cc6478d1f0cc11882137b67e8137d387e68ce63a"
+  revision = "0b14e80bb6cc3e9b906083c8117103eb1496f7e5"
 
 [[projects]]
   name = "k8s.io/apimachinery"
@@ -232,7 +232,7 @@
   branch = "master"
   name = "k8s.io/kube-openapi"
   packages = ["pkg/common"]
-  revision = "b16ebc07f5cad97831f961e4b5a9cc1caed33b7e"
+  revision = "a07b7bbb58e7fdc5144f8d7046331d29fc9ad3b3"
 
 [solve-meta]
   analyzer-name = "dep"

@@ -29,10 +29,18 @@
   branch = "k-1.9"
   source = "github.com/tamalsaha/prometheus-operator"
 
-[[constraint]]
+[[override]]
+  name = "k8s.io/apimachinery"
+  version = "kubernetes-1.9.0"
+
+[[override]]
   name = "k8s.io/apiextensions-apiserver"
   version = "kubernetes-1.9.0"
 
-[[constraint]]
+[[override]]
   name = "k8s.io/client-go"
   version = "v6.0.0"
+
+[prune]
+  unused-packages = true
+  go-tests = true

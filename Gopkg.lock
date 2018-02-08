@@ -17,7 +17,7 @@
   branch = "master"
   name = "github.com/appscode/go"
   packages = ["types"]
-  revision = "437df2b94ce2ea60464ff580c10462fbeb3e8f52"
+  revision = "fe2dd84a755c383d0516595f4537c2298be9fce5"
 
 [[projects]]
   branch = "master"
@@ -27,7 +27,7 @@
     "core/v1",
     "meta"
   ]
-  revision = "eae83543706680e70bf902428b43551cf7f1519b"
+  revision = "4ab7a342c2a4ee464d28146b8c9330c266336fba"
 
 [[projects]]
   branch = "master"
@@ -54,8 +54,14 @@
     ".",
     "log"
   ]
-  revision = "2dd44038f0b95ae693b266c5f87593b5d2fdd78d"
-  version = "v2.5.0"
+  revision = "26b41036311f2da8242db402557a0dbd09dc83da"
+  version = "v2.6.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/evanphx/json-patch"
+  packages = ["."]
+  revision = "944e07253867aacae43c04b2e6a239005443f33a"
 
 [[projects]]
   name = "github.com/ghodss/yaml"
@@ -79,7 +85,7 @@
   branch = "master"
   name = "github.com/go-openapi/spec"
   packages = ["."]
-  revision = "f3499b5df53897321d6f5e9c22cf19309d41d3bc"
+  revision = "81ece4e11fc275587f168735dd1276f5fd7badd2"
 
 [[projects]]
   branch = "master"
@@ -93,8 +99,8 @@
     "proto",
     "sortkeys"
   ]
-  revision = "342cbe0a04158f6dcb03ca0079991a51a4248c02"
-  version = "v0.5"
+  revision = "1adfc126b41513cc696b209667c8656ea7aac67c"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -129,7 +135,7 @@
     "cmp/internal/function",
     "cmp/internal/value"
   ]
-  revision = "97aa668b73e764ccdd786bc3ccd2edffe621150e"
+  revision = "3af367b6b30c263d47e8895973edcca9a49cf029"
 
 [[projects]]
   branch = "master"
@@ -155,13 +161,6 @@
     "diskcache"
   ]
   revision = "2bcd89a1743fd4b373f7370ce8ddc14dfbd18229"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/hashicorp/go-version"
-  packages = ["."]
-  revision = "53932f80ddea12bea96be074f9fb2dc545806aba"
-  source = "https://github.com/appscode/go-version.git"
 
 [[projects]]
   name = "github.com/json-iterator/go"
@@ -239,7 +238,7 @@
     "idna",
     "lex/httplex"
   ]
-  revision = "309822c5b9b9f80db67f016069a12628d94fad34"
+  revision = "f5dfe339be1d06f81b22525fe34671ee7d2c8904"
 
 [[projects]]
   branch = "master"
@@ -261,7 +260,7 @@
     "unicode/rangetable",
     "width"
   ]
-  revision = "e19ae1496984b1c655b8044a65c0300a3c878dd3"
+  revision = "4e4a3210bb54bb31f6ab2cdca2edcc0b50c420c1"
 
 [[projects]]
   name = "gopkg.in/inf.v0"
@@ -308,7 +307,7 @@
     "storage/v1alpha1",
     "storage/v1beta1"
   ]
-  revision = "dc0dd48d5a5cae9f8736bb0643cfe6052e450f1b"
+  revision = "beab4da9671e79815b7876363175af45aa180eb5"
 
 [[projects]]
   name = "k8s.io/apiextensions-apiserver"
@@ -349,6 +348,7 @@
     "pkg/util/framer",
     "pkg/util/intstr",
     "pkg/util/json",
+    "pkg/util/jsonmergepatch",
     "pkg/util/mergepatch",
     "pkg/util/net",
     "pkg/util/runtime",

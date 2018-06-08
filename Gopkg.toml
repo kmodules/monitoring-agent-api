@@ -26,8 +26,7 @@
 
 [[constraint]]
   name = "github.com/coreos/prometheus-operator"
-  branch = "k-1.10"
-  source = "github.com/tamalsaha/prometheus-operator"
+  version = "v0.20.0"
 
 [[override]]
   name = "k8s.io/apimachinery"

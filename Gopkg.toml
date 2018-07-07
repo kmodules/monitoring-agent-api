@@ -21,25 +21,25 @@
 
 
 [[constraint]]
-  branch = "release-7.0"
+  branch = "release-8.0"
   name = "github.com/appscode/kutil"
 
 [[constraint]]
   name = "github.com/coreos/prometheus-operator"
-  branch = "k-1.10"
-  source = "github.com/tamalsaha/prometheus-operator"
+  revision = "ccf8867cdb9e5bd099093e27cfdb5fecce15c90b"
 
 [[override]]
   name = "k8s.io/apimachinery"
-  version = "kubernetes-1.10.0"
+  branch = "release-1.11"
+  source = "https://github.com/pharmer/apimachinery.git"
 
 [[override]]
   name = "k8s.io/apiextensions-apiserver"
-  version = "kubernetes-1.10.0"
+  version = "kubernetes-1.11.0"
 
 [[override]]
   name = "k8s.io/client-go"
-  version = "v7.0.0"
+  version = "v8.0.0"
 
 [prune]
   unused-packages = true

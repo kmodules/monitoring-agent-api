@@ -33,7 +33,7 @@
     "core/v1",
     "meta"
   ]
-  revision = "2eea47dc1a2ec892d03d916aea7f0db8b786c7f3"
+  revision = "2f50a9a96687d25cddd29f38bf4da10ebe888eca"
 
 [[projects]]
   branch = "master"
@@ -44,7 +44,7 @@
 [[projects]]
   name = "github.com/coreos/prometheus-operator"
   packages = ["pkg/client/monitoring/v1"]
-  revision = "ccf8867cdb9e5bd099093e27cfdb5fecce15c90b"
+  revision = "v0.22.0"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -461,6 +461,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "93c22ecdf35a4071d88841fabdde52b6aa8798e2f7cdb85de175544992ef2458"
+  inputs-digest = "773aab0933fb118d196c0f41a1622d6c6528203e7004b55ed4746c43871f1585"
   solver-name = "gps-cdcl"
   solver-version = 1

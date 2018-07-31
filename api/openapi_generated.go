@@ -29,8 +29,8 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/appscode/kube-mon/api.AgentSpec":      schema_githubcom_appscode_kube_mon_api_AgentSpec(ref),
-		"github.com/appscode/kube-mon/api.PrometheusSpec": schema_githubcom_appscode_kube_mon_api_PrometheusSpec(ref),
+		"kmodules.xyz/monitoring-agent-api/api.AgentSpec":      schema_githubcom_appscode_kube_mon_api_AgentSpec(ref),
+		"kmodules.xyz/monitoring-agent-api/api.PrometheusSpec": schema_githubcom_appscode_kube_mon_api_PrometheusSpec(ref),
 	}
 }
 
@@ -48,14 +48,14 @@ func schema_githubcom_appscode_kube_mon_api_AgentSpec(ref common.ReferenceCallba
 					},
 					"prometheus": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/appscode/kube-mon/api.PrometheusSpec"),
+							Ref: ref("kmodules.xyz/monitoring-agent-api/api.PrometheusSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/appscode/kube-mon/api.PrometheusSpec"},
+			"kmodules.xyz/monitoring-agent-api/api.PrometheusSpec"},
 	}
 }
 

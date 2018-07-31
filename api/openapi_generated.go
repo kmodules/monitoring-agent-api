@@ -29,12 +29,12 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"kmodules.xyz/monitoring-agent-api/api.AgentSpec":      schema_githubcom_appscode_kube_mon_api_AgentSpec(ref),
-		"kmodules.xyz/monitoring-agent-api/api.PrometheusSpec": schema_githubcom_appscode_kube_mon_api_PrometheusSpec(ref),
+		"kmodules.xyz/monitoring-agent-api/api.AgentSpec":      schema_kmodulesxyz_monitoring_agent_api_api_AgentSpec(ref),
+		"kmodules.xyz/monitoring-agent-api/api.PrometheusSpec": schema_kmodulesxyz_monitoring_agent_api_api_PrometheusSpec(ref),
 	}
 }
 
-func schema_githubcom_appscode_kube_mon_api_AgentSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kmodulesxyz_monitoring_agent_api_api_AgentSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -59,7 +59,7 @@ func schema_githubcom_appscode_kube_mon_api_AgentSpec(ref common.ReferenceCallba
 	}
 }
 
-func schema_githubcom_appscode_kube_mon_api_PrometheusSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_kmodulesxyz_monitoring_agent_api_api_PrometheusSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{

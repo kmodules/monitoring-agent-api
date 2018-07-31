@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/appscode/kube-mon.svg?branch=master)](https://travis-ci.org/appscode/kube-mon)
-[![Go Report Card](https://goreportcard.com/badge/appscode/kube-mon "Go Report Card")](https://goreportcard.com/report/appscode/kube-mon)
-[![GoDoc](https://godoc.org/github.com/appscode/kube-mon?status.svg "GoDoc")](https://godoc.org/github.com/appscode/kube-mon)
+[![Build Status](https://travis-ci.org/kmodules/monitoring-agent-api.svg?branch=master)](https://travis-ci.org/kmodules/monitoring-agent-api)
+[![Go Report Card](https://goreportcard.com/badge/kmodules/monitoring-agent-api "Go Report Card")](https://goreportcard.com/report/kmodules/monitoring-agent-api)
+[![GoDoc](https://godoc.org/kmodules.xyz/monitoring-agent-api?status.svg "GoDoc")](https://godoc.org/kmodules.xyz/monitoring-agent-api)
 
-# kube-mon
+# monitoring-agent-api
 Monitoring agents for Kubernetes

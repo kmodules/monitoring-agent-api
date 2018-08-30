@@ -60,5 +60,6 @@ type StatsAccessor interface {
 	ServiceName() string
 	ServiceMonitorName() string
 	Path() string
+	// Scheme is used to determine url scheme of monitoring agent to exporter connection
 	Scheme() string
 }

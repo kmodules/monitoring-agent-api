@@ -60,13 +60,12 @@
   version = "v0.3.6"
 
 [[projects]]
-  branch = "k-1.12"
-  digest = "1:430a7d0e5302067b8b818473ea58507abfc8e71a302ab231bee5922f2b76fe0d"
+  digest = "1:ab23216069f86b5e23c9c6a1be6176a0d5994885f66a242dc48d2b7f03770803"
   name = "github.com/coreos/prometheus-operator"
   packages = ["pkg/client/monitoring/v1"]
   pruneopts = "UT"
-  revision = "738af7bbc72dfdce29968e12c754630b35bcab50"
-  source = "github.com/kmodules/prometheus-operator"
+  revision = "82a6ad2071ff653e38b3b4719ecb789d73f3ab05"
+  version = "v0.25.0"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"

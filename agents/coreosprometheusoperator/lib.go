@@ -5,7 +5,6 @@ import (
 	"reflect"
 
 	"github.com/appscode/go/types"
-
 	"github.com/appscode/kutil"
 	prom "github.com/coreos/prometheus-operator/pkg/client/monitoring/v1"
 	corev1 "k8s.io/api/core/v1"

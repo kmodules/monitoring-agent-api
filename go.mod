@@ -4,9 +4,7 @@ go 1.12
 
 require (
 	github.com/appscode/go v0.0.0-20190424183524-60025f1135c9
-	github.com/coreos/prometheus-operator v0.29.0
-	github.com/go-openapi/jsonpointer v0.19.0 // indirect
-	github.com/go-openapi/jsonreference v0.19.0 // indirect
+	github.com/coreos/prometheus-operator v0.30.0
 	github.com/go-openapi/spec v0.19.0
 	github.com/go-openapi/swag v0.19.0 // indirect
 	github.com/imdario/mergo v0.3.7 // indirect

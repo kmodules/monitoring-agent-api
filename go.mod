@@ -3,26 +3,28 @@ module kmodules.xyz/monitoring-agent-api
 go 1.12
 
 require (
-	github.com/appscode/go v0.0.0-20190424183524-60025f1135c9
-	github.com/coreos/prometheus-operator v0.30.0
+	github.com/appscode/go v0.0.0-20190722173419-e454bf744023
+	github.com/coreos/prometheus-operator v0.31.1
 	github.com/go-openapi/spec v0.19.0
 	github.com/go-openapi/swag v0.19.0 // indirect
 	github.com/imdario/mergo v0.3.7 // indirect
 	github.com/mailru/easyjson v0.0.0-20190403194419-1ea4449da983 // indirect
-	golang.org/x/crypto v0.0.0-20190506204251-e1dfcc566284 // indirect
-	golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c // indirect
 	golang.org/x/sys v0.0.0-20190508100423-12bbe5a7a520 // indirect
 	k8s.io/api v0.0.0-20190503110853-61630f889b3c
-	k8s.io/apiextensions-apiserver v0.0.0-20190508104225-cdabac1ba2af
+	k8s.io/apiextensions-apiserver v0.0.0-20190516231611-bf6753f2aa24
 	k8s.io/apimachinery v0.0.0-20190508063446-a3da69d3723c
 	k8s.io/client-go v11.0.0+incompatible
 	k8s.io/kube-openapi v0.0.0-20190502190224-411b2483e503
 	k8s.io/utils v0.0.0-20190506122338-8fab8cb257d5 // indirect
-	kmodules.xyz/client-go v0.0.0-20190508091620-0d215c04352f
+	kmodules.xyz/client-go v0.0.0-20190802200916-043217632b6a
 )
 
 replace (
-	github.com/graymeta/stow => github.com/appscode/stow v0.0.0-20190506085026-ca5baa008ea3
+	contrib.go.opencensus.io/exporter/ocagent => contrib.go.opencensus.io/exporter/ocagent v0.3.0
+	github.com/Azure/go-autorest => github.com/Azure/go-autorest v12.3.0+incompatible
+	github.com/census-instrumentation/opencensus-proto => github.com/census-instrumentation/opencensus-proto v0.1.0
+	github.com/golang/protobuf => github.com/golang/protobuf v1.2.0
+	go.opencensus.io => go.opencensus.io v0.21.0
 	k8s.io/api => k8s.io/api v0.0.0-20190313235455-40a48860b5ab
 	k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.0.0-20190315093550-53c4693659ed
 	k8s.io/apimachinery => github.com/kmodules/apimachinery v0.0.0-20190508045248-a52a97a7a2bf

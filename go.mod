@@ -3,20 +3,18 @@ module kmodules.xyz/monitoring-agent-api
 go 1.12
 
 require (
-	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/appscode/go v0.0.0-20191025021232-311ac347b3ef
 	github.com/coreos/prometheus-operator v0.30.1
 	github.com/go-openapi/spec v0.19.0
-	github.com/onsi/ginkgo v1.8.0 // indirect
-	github.com/onsi/gomega v1.5.0 // indirect
+	github.com/gogo/protobuf v1.2.1
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 	k8s.io/api v0.0.0-20190503110853-61630f889b3c
 	k8s.io/apiextensions-apiserver v0.0.0-20190516231611-bf6753f2aa24
 	k8s.io/apimachinery v0.0.0-20190508063446-a3da69d3723c
 	k8s.io/client-go v11.0.0+incompatible
-	k8s.io/klog v0.3.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20190502190224-411b2483e503
-	k8s.io/utils v0.0.0-20190506122338-8fab8cb257d5 // indirect
-	kmodules.xyz/client-go v0.0.0-20191106092240-221d8b290c75
+	kmodules.xyz/client-go v0.0.0-20191106181350-088754189f4e
+	kmodules.xyz/custom-resources v0.0.0-20191106201002-d1689cc406ca
 )
 
 replace (

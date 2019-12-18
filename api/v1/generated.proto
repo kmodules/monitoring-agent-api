@@ -26,6 +26,33 @@ import "k8s.io/api/core/v1/generated.proto";
 // Package-wide variables from generator "generated".
 option go_package = "v1";
 
+message RelabelConfig {
+  // The source labels select values from existing labels. Their content is concatenated
+  // using the configured separator and matched against the configured regular expression
+  // for the replace, keep, and drop actions.
+  repeated string sourceLabels = 1;
+
+  // Separator placed between concatenated source label values. default is ';'.
+  optional string separator = 2;
+
+  // Label to which the resulting value is written in a replace action.
+  // It is mandatory for replace actions. Regex capture groups are available.
+  optional string targetLabel = 3;
+
+  // Regular expression against which the extracted value is matched. defailt is '(.*)'
+  optional string regex = 4;
+
+  // Modulus to take of the hash of the source label values.
+  optional uint64 modulus = 5;
+
+  // Replacement value against which a regex replace is performed if the
+  // regular expression matches. Regex capture groups are available. Default is '$1'
+  optional string replacement = 6;
+
+  // Action to perform based on regex matching. Default is 'replace'
+  optional string action = 7;
+}
+
 message AgentSpec {
   optional string agent = 1;
 
@@ -75,5 +102,11 @@ message PrometheusSpec {
 
   // Interval at which metrics should be scraped
   optional string interval = 4;
+
+  // MetricRelabelings configuration of ServiceMonitor object.
+  repeated RelabelConfig metricRelabelings = 5;
+
+  // Relabelings configuration of ServiceMonitor object.
+  repeated RelabelConfig relabelings = 6;
 }
 

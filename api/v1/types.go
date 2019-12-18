@@ -96,10 +96,10 @@ type PrometheusSpec struct {
 	// Parameters map[string]string `json:"parameters,omitempty"`
 
 	// MetricRelabelings configuration of ServiceMonitor object.
-	MetricRelabelConfigs []*promapi.RelabelConfig `json:"metricRelabelings,omitempty"`
+	MetricRelabelConfigs []*promapi.RelabelConfig `json:"metricRelabelings,omitempty" protobuf:"bytes,5,rep,name=metricRelabelings"`
 
 	// Relabelings configuration of ServiceMonitor object.
-	RelabelConfigs []*promapi.RelabelConfig `json:"relabelings,omitempty"`
+	RelabelConfigs []*promapi.RelabelConfig `json:"relabelings,omitempty" protobuf:"bytes,6,rep,name=relabelings"`
 }
 
 type Agent interface {

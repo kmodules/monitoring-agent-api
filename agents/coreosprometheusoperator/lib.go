@@ -107,6 +107,11 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 				update = true
 				break
 			}
+			if !reflect.DeepEqual(e.MetricRelabelConfigs, new.Prometheus.MetricRelabelConfigs) ||
+			   !reflect.DeepEqual(e.RelabelConfigs, new.Prometheus.RelabelConfigs) {
+				update = true
+				break
+			}
 		}
 	}
 
@@ -126,6 +131,8 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 		}
 		for i := range actual.Spec.Endpoints {
 			actual.Spec.Endpoints[i].Interval = new.Prometheus.Interval
+			actual.Spec.Endpoints[i].MetricRelabelConfigs = new.Prometheus.MetricRelabelConfigs
+			actual.Spec.Endpoints[i].RelabelConfigs = new.Prometheus.RelabelConfigs
 		}
 		_, err = agent.promClient.ServiceMonitors(new.Prometheus.Namespace).Update(actual)
 		return kutil.VerbUpdated, err
@@ -165,6 +172,8 @@ func (agent *PrometheusCoreosOperator) createServiceMonitor(sp api.StatsAccessor
 					Interval:    spec.Prometheus.Interval,
 					Path:        sp.Path(),
 					HonorLabels: true,
+					MetricRelabelConfigs: spec.Prometheus.MetricRelabelConfigs,
+					RelabelConfigs: spec.Prometheus.RelabelConfigs,
 				},
 			},
 			Selector: metav1.LabelSelector{

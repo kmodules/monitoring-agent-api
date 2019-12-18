@@ -22,6 +22,8 @@ import (
 	kutil "kmodules.xyz/client-go"
 
 	core "k8s.io/api/core/v1"
+
+	promapi "github.com/coreos/prometheus-operator/pkg/apis/monitoring/v1"
 )
 
 type AgentType string
@@ -92,6 +94,12 @@ type PrometheusSpec struct {
 
 	// Parameters are key value pairs that are passed as flags to exporters.
 	// Parameters map[string]string `json:"parameters,omitempty"`
+
+	// MetricRelabelings configuration of ServiceMonitor object.
+	MetricRelabelConfigs []*promapi.RelabelConfig `json:"metricRelabelings,omitempty"`
+
+	// Relabelings configuration of ServiceMonitor object.
+	RelabelConfigs []*promapi.RelabelConfig `json:"relabelings,omitempty"`
 }
 
 type Agent interface {

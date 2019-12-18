@@ -21,6 +21,7 @@ limitations under the License.
 package v1
 
 import (
+	monitoringv1 "github.com/coreos/prometheus-operator/pkg/apis/monitoring/v1"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -71,6 +72,28 @@ func (in *PrometheusSpec) DeepCopyInto(out *PrometheusSpec) {
 		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
 			(*out)[key] = val
+		}
+	}
+	if in.MetricRelabelConfigs != nil {
+		in, out := &in.MetricRelabelConfigs, &out.MetricRelabelConfigs
+		*out = make([]*monitoringv1.RelabelConfig, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(monitoringv1.RelabelConfig)
+				(*in).DeepCopyInto(*out)
+			}
+		}
+	}
+	if in.RelabelConfigs != nil {
+		in, out := &in.RelabelConfigs, &out.RelabelConfigs
+		*out = make([]*monitoringv1.RelabelConfig, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(monitoringv1.RelabelConfig)
+				(*in).DeepCopyInto(*out)
+			}
 		}
 	}
 	return

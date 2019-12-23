@@ -155,7 +155,7 @@ gen-crd-protos:
 			--packages=-k8s.io/api/core/v1,kmodules.xyz/monitoring-agent-api/api/v1
 
 .PHONY: gen
-gen: clientset openapi gen-crd-protos
+gen: clientset gen-crd-protos openapi
 
 fmt: $(BUILD_DIRS)
 	@docker run                                                 \

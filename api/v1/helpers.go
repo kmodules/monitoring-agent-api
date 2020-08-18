@@ -24,28 +24,10 @@ func (agent *AgentSpec) SetDefaults() {
 	if agent == nil {
 		return
 	}
+
 	if agent.Prometheus == nil {
 		return
 	}
-
-	if agent.Prometheus.ServiceMonitor == nil {
-		agent.Prometheus.ServiceMonitor = &ServiceMonitorSpec{}
-	}
-
-	if agent.Prometheus.Namespace != "" && agent.Prometheus.ServiceMonitor.Namespace == "" {
-		agent.Prometheus.ServiceMonitor.Namespace = agent.Prometheus.Namespace
-	}
-	agent.Prometheus.Namespace = ""
-
-	if len(agent.Prometheus.Labels) > 0 && len(agent.Prometheus.ServiceMonitor.Labels) == 0 {
-		agent.Prometheus.ServiceMonitor.Labels = agent.Prometheus.Labels
-	}
-	agent.Prometheus.Labels = nil
-
-	if agent.Prometheus.Interval != "" && agent.Prometheus.ServiceMonitor.Interval == "" {
-		agent.Prometheus.ServiceMonitor.Interval = agent.Prometheus.Interval
-	}
-	agent.Prometheus.Interval = ""
 
 	if agent.Prometheus.Exporter == nil {
 		agent.Prometheus.Exporter = &PrometheusExporterSpec{}
@@ -75,6 +57,22 @@ func (agent *AgentSpec) SetDefaults() {
 		agent.Prometheus.Exporter.SecurityContext = agent.SecurityContext
 	}
 	agent.SecurityContext = nil
+
+	if agent.Agent == AgentPrometheusOperator || agent.Agent == AgentCoreOSPrometheus || agent.Agent == DeprecatedAgentCoreOSPrometheus {
+		if agent.Prometheus.ServiceMonitor == nil {
+			agent.Prometheus.ServiceMonitor = &ServiceMonitorSpec{}
+		}
+
+		if len(agent.Prometheus.Labels) > 0 && len(agent.Prometheus.ServiceMonitor.Labels) == 0 {
+			agent.Prometheus.ServiceMonitor.Labels = agent.Prometheus.Labels
+		}
+		agent.Prometheus.Labels = nil
+
+		if agent.Prometheus.Interval != "" && agent.Prometheus.ServiceMonitor.Interval == "" {
+			agent.Prometheus.ServiceMonitor.Interval = agent.Prometheus.Interval
+		}
+		agent.Prometheus.Interval = ""
+	}
 }
 
 func resourceIsZero(r core.ResourceRequirements) bool {

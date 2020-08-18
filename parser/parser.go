@@ -44,11 +44,6 @@ func Parse(annotations map[string]string, keyPrefix string, defaultExporterPort 
 	case api.AgentPrometheusOperator, api.AgentCoreOSPrometheus, api.DeprecatedAgentCoreOSPrometheus:
 		var prom api.PrometheusSpec
 
-		prom.Namespace, _ = meta.GetStringValue(annotations, path.Join(keyPrefix, serviceMonitorNamespace))
-		if prom.Namespace == "" {
-			return nil, fmt.Errorf("missing %s annotation", path.Join(keyPrefix, serviceMonitorNamespace))
-		}
-
 		prom.Labels, err = meta.GetMapValue(annotations, path.Join(keyPrefix, serviceMonitorLabels))
 		if err != nil && err != kutil.ErrNotFound {
 			return nil, err

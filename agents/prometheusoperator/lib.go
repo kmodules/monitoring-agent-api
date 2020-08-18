@@ -18,23 +18,28 @@ package prometheusoperator
 
 import (
 	"context"
-	"errors"
-	"reflect"
 
 	kutil "kmodules.xyz/client-go"
+	core_util "kmodules.xyz/client-go/core/v1"
 	api "kmodules.xyz/monitoring-agent-api/api/v1"
 
-	"github.com/appscode/go/types"
 	promapi "github.com/coreos/prometheus-operator/pkg/apis/monitoring/v1"
 	prom "github.com/coreos/prometheus-operator/pkg/client/versioned/typed/monitoring/v1"
+	jsonpatch "github.com/evanphx/json-patch"
+	"github.com/golang/glog"
+	jsoniter "github.com/json-iterator/go"
+	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
 	kerr "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/discovery"
 	"k8s.io/client-go/kubernetes"
 )
+
+var json = jsoniter.ConfigFastest
 
 // PrometheusCoreosOperator creates `ServiceMonitor` so that CoreOS Prometheus operator can generate necessary config for Prometheus.
 type PrometheusCoreosOperator struct {
@@ -55,93 +60,87 @@ func (agent *PrometheusCoreosOperator) GetType() api.AgentType {
 	return agent.at
 }
 
+func CreateOrPatchServiceMonitor(ctx context.Context, c prom.MonitoringV1Interface, meta metav1.ObjectMeta, transform func(monitor *promapi.ServiceMonitor) *promapi.ServiceMonitor, opts metav1.PatchOptions) (*promapi.ServiceMonitor, kutil.VerbType, error) {
+	cur, err := c.ServiceMonitors(meta.Namespace).Get(ctx, meta.Name, metav1.GetOptions{})
+	if kerr.IsNotFound(err) {
+		glog.V(3).Infof("Creating ServiceMonitor %s/%s.", meta.Namespace, meta.Name)
+		out, err := c.ServiceMonitors(meta.Namespace).Create(ctx, transform(&promapi.ServiceMonitor{
+			TypeMeta: metav1.TypeMeta{
+				Kind:       promapi.PrometheusesKind,
+				APIVersion: promapi.SchemeGroupVersion.String(),
+			},
+			ObjectMeta: meta,
+		}), metav1.CreateOptions{
+			DryRun:       opts.DryRun,
+			FieldManager: opts.FieldManager,
+		})
+		return out, kutil.VerbCreated, err
+	} else if err != nil {
+		return nil, kutil.VerbUnchanged, err
+	}
+	return PatchServiceMonitor(ctx, c, cur, transform, opts)
+}
+
+func PatchServiceMonitor(ctx context.Context, c prom.MonitoringV1Interface, cur *promapi.ServiceMonitor, transform func(monitor *promapi.ServiceMonitor) *promapi.ServiceMonitor, opts metav1.PatchOptions) (*promapi.ServiceMonitor, kutil.VerbType, error) {
+	return PatchServiceMonitorbject(ctx, c, cur, transform(cur.DeepCopy()), opts)
+}
+
+func PatchServiceMonitorbject(ctx context.Context, c prom.MonitoringV1Interface, cur, mod *promapi.ServiceMonitor, opts metav1.PatchOptions) (*promapi.ServiceMonitor, kutil.VerbType, error) {
+	curJson, err := json.Marshal(cur)
+	if err != nil {
+		return nil, kutil.VerbUnchanged, err
+	}
+
+	modJson, err := json.Marshal(mod)
+	if err != nil {
+		return nil, kutil.VerbUnchanged, err
+	}
+
+	patch, err := jsonpatch.CreateMergePatch(curJson, modJson)
+	if err != nil {
+		return nil, kutil.VerbUnchanged, err
+	}
+	if len(patch) == 0 || string(patch) == "{}" {
+		return cur, kutil.VerbUnchanged, nil
+	}
+	glog.V(3).Infof("Patching ServiceMonitor %s/%s with %s.", cur.Namespace, cur.Name, string(patch))
+	out, err := c.ServiceMonitors(cur.Namespace).Patch(ctx, cur.Name, types.MergePatchType, patch, opts)
+	return out, kutil.VerbPatched, err
+}
+
+func TryUpdateStatefulSet(ctx context.Context, c prom.MonitoringV1Interface, meta metav1.ObjectMeta, transform func(monitor *promapi.ServiceMonitor) *promapi.ServiceMonitor, opts metav1.UpdateOptions) (result *promapi.ServiceMonitor, err error) {
+	attempt := 0
+	err = wait.PollImmediate(kutil.RetryInterval, kutil.RetryTimeout, func() (bool, error) {
+		attempt++
+		cur, e2 := c.ServiceMonitors(meta.Namespace).Get(ctx, meta.Name, metav1.GetOptions{})
+		if kerr.IsNotFound(e2) {
+			return false, e2
+		} else if e2 == nil {
+			result, e2 = c.ServiceMonitors(cur.Namespace).Update(ctx, transform(cur.DeepCopy()), opts)
+			return e2 == nil, nil
+		}
+		glog.Errorf("Attempt %d failed to update ServiceMonitor %s/%s due to %v.", attempt, cur.Namespace, cur.Name, e2)
+		return false, nil
+	})
+
+	if err != nil {
+		err = errors.Errorf("failed to update ServiceMonitor %s/%s after %d attempts due to %v", meta.Namespace, meta.Name, attempt, err)
+	}
+	return
+}
+
 func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.AgentSpec) (kutil.VerbType, error) {
 	if !agent.isOperatorInstalled() {
 		return kutil.VerbUnchanged, errors.New("cluster does not support CoreOS Prometheus operator")
 	}
-	old, err := agent.promClient.ServiceMonitors(metav1.NamespaceAll).List(context.TODO(), metav1.ListOptions{
-		LabelSelector: labels.Set{
-			api.KeyService: sp.ServiceName() + "." + sp.GetNamespace(),
-		}.String(),
-	})
-	if err != nil {
-		return kutil.VerbUnchanged, err
-	}
 
-	vt := kutil.VerbUnchanged
-	for _, item := range old.Items {
-		if item != nil && (new == nil || item.Namespace != new.Prometheus.ServiceMonitor.Namespace) {
-			err := agent.promClient.ServiceMonitors(item.Namespace).Delete(context.TODO(), sp.ServiceMonitorName(), metav1.DeleteOptions{})
-			if err != nil && !kerr.IsNotFound(err) {
-				return kutil.VerbUnchanged, err
-			} else if err == nil {
-				vt = kutil.VerbDeleted
-			}
-		}
-	}
-	if new == nil {
-		return vt, nil
-	}
-
-	// Unique Label Selector for ServiceMonitor
-	if new.Prometheus.ServiceMonitor.Labels == nil {
-		new.Prometheus.ServiceMonitor.Labels = map[string]string{}
-	}
-	new.Prometheus.ServiceMonitor.Labels[api.KeyService] = sp.ServiceName() + "." + sp.GetNamespace()
-
-	actual, err := agent.promClient.ServiceMonitors(new.Prometheus.ServiceMonitor.Namespace).Get(context.TODO(), sp.ServiceMonitorName(), metav1.GetOptions{})
-	if kerr.IsNotFound(err) {
-		return agent.createServiceMonitor(sp, new)
-	} else if err != nil {
-		return vt, err
-	}
-
-	update := false
-	if !reflect.DeepEqual(actual.Labels, new.Prometheus.ServiceMonitor.Labels) {
-		update = true
-	}
-
-	if !update {
-		for _, e := range actual.Spec.Endpoints {
-			if e.Interval != new.Prometheus.ServiceMonitor.Interval {
-				update = true
-				break
-			}
-		}
-	}
-
-	if update {
-		svc, err := agent.k8sClient.CoreV1().Services(sp.GetNamespace()).Get(context.TODO(), sp.ServiceName(), metav1.GetOptions{})
-		if err != nil {
-			return vt, err
-		}
-
-		actual.Labels = new.Prometheus.ServiceMonitor.Labels
-		actual.ObjectMeta = agent.ensureOwnerReference(actual.ObjectMeta, *svc)
-		actual.Spec.Selector = metav1.LabelSelector{
-			MatchLabels: svc.Labels,
-		}
-		actual.Spec.NamespaceSelector = promapi.NamespaceSelector{
-			MatchNames: []string{sp.GetNamespace()},
-		}
-		for i := range actual.Spec.Endpoints {
-			actual.Spec.Endpoints[i].Interval = new.Prometheus.ServiceMonitor.Interval
-		}
-		_, err = agent.promClient.ServiceMonitors(new.Prometheus.ServiceMonitor.Namespace).Update(context.TODO(), actual, metav1.UpdateOptions{})
-		return kutil.VerbUpdated, err
-	}
-
-	return vt, nil
-}
-
-func (agent *PrometheusCoreosOperator) createServiceMonitor(sp api.StatsAccessor, spec *api.AgentSpec) (kutil.VerbType, error) {
 	svc, err := agent.k8sClient.CoreV1().Services(sp.GetNamespace()).Get(context.TODO(), sp.ServiceName(), metav1.GetOptions{})
 	if err != nil {
 		return kutil.VerbUnchanged, err
 	}
 	var portName string
 	for _, p := range svc.Spec.Ports {
-		if p.Port == spec.Prometheus.Exporter.Port {
+		if p.Port == new.Prometheus.Exporter.Port {
 			portName = p.Name
 		}
 	}
@@ -149,34 +148,33 @@ func (agent *PrometheusCoreosOperator) createServiceMonitor(sp api.StatsAccessor
 		return kutil.VerbUnchanged, errors.New("no port found in stats service")
 	}
 
-	sm := &promapi.ServiceMonitor{
-		ObjectMeta: metav1.ObjectMeta{
-			Name:      sp.ServiceMonitorName(),
-			Namespace: spec.Prometheus.ServiceMonitor.Namespace,
-			Labels:    spec.Prometheus.ServiceMonitor.Labels,
-		},
-		Spec: promapi.ServiceMonitorSpec{
-			NamespaceSelector: promapi.NamespaceSelector{
-				MatchNames: []string{sp.GetNamespace()},
-			},
-			Endpoints: []promapi.Endpoint{
-				{
-					Port:        portName,
-					Interval:    spec.Prometheus.ServiceMonitor.Interval,
-					Path:        sp.Path(),
-					HonorLabels: true,
-				},
-			},
-			Selector: metav1.LabelSelector{
-				MatchLabels: svc.Labels,
-			},
-		},
+	smMeta := metav1.ObjectMeta{
+		Name:      sp.ServiceName(),
+		Namespace: sp.GetNamespace(),
 	}
-	sm.ObjectMeta = agent.ensureOwnerReference(sm.ObjectMeta, *svc)
-	if _, err := agent.promClient.ServiceMonitors(spec.Prometheus.ServiceMonitor.Namespace).Create(context.TODO(), sm, metav1.CreateOptions{}); err != nil && !kerr.IsAlreadyExists(err) {
-		return kutil.VerbUnchanged, err
-	}
-	return kutil.VerbCreated, nil
+	owner := metav1.NewControllerRef(svc, corev1.SchemeGroupVersion.WithKind("Service"))
+
+	_, vt, err := CreateOrPatchServiceMonitor(context.TODO(), agent.promClient, smMeta, func(in *promapi.ServiceMonitor) *promapi.ServiceMonitor {
+		in.Labels = new.Prometheus.ServiceMonitor.Labels
+		in.Spec.NamespaceSelector = promapi.NamespaceSelector{
+			MatchNames: []string{sp.GetNamespace()},
+		}
+		in.Spec.Endpoints = []promapi.Endpoint{
+			{
+				Port:        portName,
+				Interval:    new.Prometheus.ServiceMonitor.Interval,
+				Path:        sp.Path(),
+				HonorLabels: true,
+			},
+		}
+		in.Spec.Selector = metav1.LabelSelector{
+			MatchLabels: svc.Labels,
+		}
+		core_util.EnsureOwnerReference(&in.ObjectMeta, owner)
+		return in
+	}, metav1.PatchOptions{})
+
+	return vt, nil
 }
 
 func (agent *PrometheusCoreosOperator) Delete(sp api.StatsAccessor) (kutil.VerbType, error) {
@@ -184,25 +182,11 @@ func (agent *PrometheusCoreosOperator) Delete(sp api.StatsAccessor) (kutil.VerbT
 		return kutil.VerbUnchanged, errors.New("cluster does not support CoreOS Prometheus operator")
 	}
 
-	old, err := agent.promClient.ServiceMonitors(metav1.NamespaceAll).List(context.TODO(), metav1.ListOptions{
-		LabelSelector: labels.Set{
-			api.KeyService: sp.GetNamespace() + "." + sp.ServiceName(),
-		}.String(),
-	})
-	if err != nil && !kerr.IsNotFound(err) {
+	err := agent.promClient.ServiceMonitors(sp.GetNamespace()).Delete(context.TODO(), sp.ServiceName(), metav1.DeleteOptions{})
+	if err != nil {
 		return kutil.VerbUnchanged, err
 	}
-
-	vt := kutil.VerbUnchanged
-	for _, item := range old.Items {
-		err := agent.promClient.ServiceMonitors(item.Namespace).Delete(context.TODO(), sp.ServiceMonitorName(), metav1.DeleteOptions{})
-		if err != nil && !kerr.IsNotFound(err) {
-			return kutil.VerbUnchanged, err
-		} else if err == nil {
-			vt = kutil.VerbDeleted
-		}
-	}
-	return vt, nil
+	return kutil.VerbDeleted, nil
 }
 
 func (agent *PrometheusCoreosOperator) isOperatorInstalled() bool {
@@ -223,24 +207,4 @@ func (agent *PrometheusCoreosOperator) isOperatorInstalled() bool {
 		}
 	}
 	return false
-}
-
-func (agent *PrometheusCoreosOperator) ensureOwnerReference(in metav1.ObjectMeta, svc corev1.Service) metav1.ObjectMeta {
-	fi := -1
-	for i, ref := range in.OwnerReferences {
-		if ref.Kind == "Service" && ref.Name == svc.Name {
-			fi = i
-			break
-		}
-	}
-	if fi == -1 {
-		in.OwnerReferences = append(in.OwnerReferences, metav1.OwnerReference{})
-		fi = len(in.OwnerReferences) - 1
-	}
-	in.OwnerReferences[fi].APIVersion = "v1"
-	in.OwnerReferences[fi].Kind = "Service"
-	in.OwnerReferences[fi].Name = svc.Name
-	in.OwnerReferences[fi].UID = svc.UID
-	in.OwnerReferences[fi].BlockOwnerDeletion = types.TrueP()
-	return in
 }

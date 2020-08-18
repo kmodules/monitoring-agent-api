@@ -149,7 +149,7 @@ func (agent *PrometheusCoreosOperator) CreateOrUpdate(sp api.StatsAccessor, new 
 	}
 
 	smMeta := metav1.ObjectMeta{
-		Name:      sp.ServiceName(),
+		Name:      sp.ServiceMonitorName(),
 		Namespace: sp.GetNamespace(),
 	}
 	owner := metav1.NewControllerRef(svc, corev1.SchemeGroupVersion.WithKind("Service"))
@@ -182,7 +182,7 @@ func (agent *PrometheusCoreosOperator) Delete(sp api.StatsAccessor) (kutil.VerbT
 		return kutil.VerbUnchanged, errors.New("cluster does not support CoreOS Prometheus operator")
 	}
 
-	err := agent.promClient.ServiceMonitors(sp.GetNamespace()).Delete(context.TODO(), sp.ServiceName(), metav1.DeleteOptions{})
+	err := agent.promClient.ServiceMonitors(sp.GetNamespace()).Delete(context.TODO(), sp.ServiceMonitorName(), metav1.DeleteOptions{})
 	if err != nil {
 		return kutil.VerbUnchanged, err
 	}

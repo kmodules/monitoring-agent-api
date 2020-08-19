@@ -3,11 +3,14 @@ module kmodules.xyz/monitoring-agent-api
 go 1.12
 
 require (
-	github.com/appscode/go v0.0.0-20200323182826-54e98e09185a
 	github.com/coreos/prometheus-operator v0.39.0
+	github.com/evanphx/json-patch v4.5.0+incompatible
 	github.com/go-openapi/spec v0.19.3
 	github.com/gogo/protobuf v1.3.1
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+	github.com/json-iterator/go v1.1.8
 	github.com/mattn/go-isatty v0.0.9 // indirect
+	github.com/pkg/errors v0.8.1
 	k8s.io/api v0.18.3
 	k8s.io/apimachinery v0.18.3
 	k8s.io/client-go v12.0.0+incompatible

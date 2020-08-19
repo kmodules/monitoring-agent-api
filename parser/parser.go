@@ -27,7 +27,6 @@ import (
 
 const (
 	monitoringAgent              = "monitoring-agent"                         // Name of monitoring agent
-	serviceMonitorNamespace      = "service-monitor-namespace"                // Kube NS where service monitors will be created
 	serviceMonitorLabels         = "service-monitor-labels"                   // map[string]string used to select Prometheus instance
 	serviceMonitorPort           = "service-monitor-endpoint-port"            // Port on stats service used to expose metrics
 	serviceMonitorScrapeInterval = "service-monitor-endpoint-scrape-interval" // scrape interval

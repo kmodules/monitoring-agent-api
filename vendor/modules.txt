@@ -272,6 +272,7 @@ k8s.io/utils/integer
 # kmodules.xyz/client-go v0.0.0-20200524205059-e986bc44c91b
 kmodules.xyz/client-go
 kmodules.xyz/client-go/core/v1
+kmodules.xyz/client-go/discovery
 kmodules.xyz/client-go/meta
 # sigs.k8s.io/structured-merge-diff/v3 v3.0.0
 sigs.k8s.io/structured-merge-diff/v3/value

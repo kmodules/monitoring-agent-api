@@ -78,7 +78,7 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 	owner := metav1.NewControllerRef(svc, corev1.SchemeGroupVersion.WithKind("Service"))
 
 	_, vt, err := prom_util.CreateOrPatchServiceMonitor(context.TODO(), agent.promClient, smMeta, func(in *promapi.ServiceMonitor) *promapi.ServiceMonitor {
-		in.Labels = new.Prometheus.ServiceMonitor.Labels
+		in.Labels = core_util.UpsertMap(sp.ServiceMonitorAdditionalLabels(), new.Prometheus.ServiceMonitor.Labels)
 		core_util.EnsureOwnerReference(&in.ObjectMeta, owner)
 
 		in.Spec.NamespaceSelector = promapi.NamespaceSelector{

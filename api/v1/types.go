@@ -163,6 +163,7 @@ type StatsAccessor interface {
 	GetNamespace() string
 	ServiceName() string
 	ServiceMonitorName() string
+	ServiceMonitorAdditionalLabels() map[string]string
 	Path() string
 	// Scheme is used to determine url scheme /metrics endpoint
 	Scheme() string

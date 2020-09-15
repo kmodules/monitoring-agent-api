@@ -10,7 +10,7 @@ require (
 	github.com/json-iterator/go v1.1.9
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus-operator/prometheus-operator v0.42.0
-	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.0.0-20200911141619-675d303ee0b8
+	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.42.0
 	k8s.io/api v0.18.3
 	k8s.io/apimachinery v0.18.3
 	k8s.io/client-go v12.0.0+incompatible

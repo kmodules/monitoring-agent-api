@@ -11,7 +11,7 @@ github.com/davecgh/go-spew/spew
 # github.com/emicklei/go-restful v2.9.5+incompatible
 github.com/emicklei/go-restful
 github.com/emicklei/go-restful/log
-# github.com/evanphx/json-patch v4.5.0+incompatible
+# github.com/evanphx/json-patch v4.9.0+incompatible
 github.com/evanphx/json-patch
 # github.com/fatih/structs v1.1.0
 github.com/fatih/structs
@@ -19,7 +19,7 @@ github.com/fatih/structs
 github.com/go-openapi/jsonpointer
 # github.com/go-openapi/jsonreference v0.19.3
 github.com/go-openapi/jsonreference
-# github.com/go-openapi/spec v0.19.7
+# github.com/go-openapi/spec v0.19.8
 github.com/go-openapi/spec
 # github.com/go-openapi/swag v0.19.9
 github.com/go-openapi/swag
@@ -30,7 +30,7 @@ github.com/gogo/protobuf/protoc-gen-gogo/descriptor
 github.com/gogo/protobuf/sortkeys
 # github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
 github.com/golang/glog
-# github.com/golang/protobuf v1.4.1 => github.com/golang/protobuf v1.3.2
+# github.com/golang/protobuf v1.4.2 => github.com/golang/protobuf v1.3.2
 github.com/golang/protobuf/jsonpb
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -52,7 +52,7 @@ github.com/googleapis/gnostic/compiler
 github.com/googleapis/gnostic/extensions
 # github.com/imdario/mergo v0.3.5 => github.com/imdario/mergo v0.3.5
 github.com/imdario/mergo
-# github.com/json-iterator/go v1.1.9
+# github.com/json-iterator/go v1.1.10
 github.com/json-iterator/go
 # github.com/mailru/easyjson v0.7.1
 github.com/mailru/easyjson/buffer
@@ -66,10 +66,10 @@ github.com/modern-go/concurrent
 github.com/modern-go/reflect2
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# github.com/prometheus-operator/prometheus-operator v0.42.0
+# github.com/prometheus-operator/prometheus-operator v0.42.0 => github.com/prometheus-operator/prometheus-operator v0.42.0
 github.com/prometheus-operator/prometheus-operator/pkg/client/versioned/scheme
 github.com/prometheus-operator/prometheus-operator/pkg/client/versioned/typed/monitoring/v1
-# github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.42.0 => github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.0.0-20200911141619-675d303ee0b8
+# github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.42.0 => github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.42.0
 github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring
 github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring/v1
 # github.com/sergi/go-diff v1.0.0
@@ -93,7 +93,7 @@ golang.org/x/net/idna
 # golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 golang.org/x/oauth2
 golang.org/x/oauth2/internal
-# golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
+# golang.org/x/sys v0.0.0-20200615200032-f1bc736245b1
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
@@ -121,7 +121,7 @@ google.golang.org/appengine/urlfetch
 gopkg.in/inf.v0
 # gopkg.in/yaml.v2 v2.3.0
 gopkg.in/yaml.v2
-# k8s.io/api v0.18.3 => github.com/kmodules/api v0.18.4-0.20200524125823-c8bc107809b9
+# k8s.io/api v0.18.9 => github.com/kmodules/api v0.18.10-0.20200922195318-d60fe725dea0
 k8s.io/api/admissionregistration/v1
 k8s.io/api/admissionregistration/v1beta1
 k8s.io/api/apps/v1
@@ -162,11 +162,12 @@ k8s.io/api/settings/v1alpha1
 k8s.io/api/storage/v1
 k8s.io/api/storage/v1alpha1
 k8s.io/api/storage/v1beta1
-# k8s.io/apimachinery v0.18.3 => github.com/kmodules/apimachinery v0.19.0-alpha.0.0.20200520235721-10b58e57a423
+# k8s.io/apimachinery v0.18.9 => github.com/kmodules/apimachinery v0.19.0-alpha.0.0.20200922195535-0c9a1b86beec
 k8s.io/apimachinery/pkg/api/errors
 k8s.io/apimachinery/pkg/api/meta
 k8s.io/apimachinery/pkg/api/resource
 k8s.io/apimachinery/pkg/apis/meta/internalversion
+k8s.io/apimachinery/pkg/apis/meta/internalversion/scheme
 k8s.io/apimachinery/pkg/apis/meta/v1
 k8s.io/apimachinery/pkg/apis/meta/v1/unstructured
 k8s.io/apimachinery/pkg/apis/meta/v1beta1
@@ -203,7 +204,7 @@ k8s.io/apimachinery/pkg/version
 k8s.io/apimachinery/pkg/watch
 k8s.io/apimachinery/third_party/forked/golang/json
 k8s.io/apimachinery/third_party/forked/golang/reflect
-# k8s.io/client-go v12.0.0+incompatible => k8s.io/client-go v0.18.3
+# k8s.io/client-go v0.18.9 => github.com/kmodules/k8s-client-go v0.18.10-0.20200922201634-73fedf3d677e
 k8s.io/client-go/discovery
 k8s.io/client-go/kubernetes
 k8s.io/client-go/kubernetes/scheme
@@ -247,6 +248,7 @@ k8s.io/client-go/kubernetes/typed/settings/v1alpha1
 k8s.io/client-go/kubernetes/typed/storage/v1
 k8s.io/client-go/kubernetes/typed/storage/v1alpha1
 k8s.io/client-go/kubernetes/typed/storage/v1beta1
+k8s.io/client-go/metadata
 k8s.io/client-go/pkg/apis/clientauthentication
 k8s.io/client-go/pkg/apis/clientauthentication/v1alpha1
 k8s.io/client-go/pkg/apis/clientauthentication/v1beta1
@@ -269,9 +271,9 @@ k8s.io/klog
 # k8s.io/kube-openapi v0.0.0-20200410145947-61e04a5be9a6 => k8s.io/kube-openapi v0.0.0-20200410145947-61e04a5be9a6
 k8s.io/kube-openapi/pkg/common
 k8s.io/kube-openapi/pkg/util/proto
-# k8s.io/utils v0.0.0-20200414100711-2df71ebbae66
+# k8s.io/utils v0.0.0-20200414100711-2df71ebbae66 => k8s.io/utils v0.0.0-20200324210504-a9aa75ae1b89
 k8s.io/utils/integer
-# kmodules.xyz/client-go v0.0.0-20200524205059-e986bc44c91b
+# kmodules.xyz/client-go v0.0.0-20200922200830-63d86b6e5b63
 kmodules.xyz/client-go
 kmodules.xyz/client-go/core/v1
 kmodules.xyz/client-go/discovery

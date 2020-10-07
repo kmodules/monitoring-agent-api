@@ -42,7 +42,7 @@ func Parse(annotations map[string]string, keyPrefix string, defaultExporterPort 
 	switch agent {
 	case api.AgentPrometheusOperator:
 		prom := api.PrometheusSpec{
-			Exporter:       &api.PrometheusExporterSpec{},
+			Exporter:       api.PrometheusExporterSpec{},
 			ServiceMonitor: &api.ServiceMonitorSpec{},
 		}
 
@@ -69,7 +69,7 @@ func Parse(annotations map[string]string, keyPrefix string, defaultExporterPort 
 		return &api.AgentSpec{Agent: agent, Prometheus: &prom}, nil
 	case api.AgentPrometheusBuiltin:
 		prom := api.PrometheusSpec{
-			Exporter: &api.PrometheusExporterSpec{},
+			Exporter: api.PrometheusExporterSpec{},
 		}
 
 		port, err := meta.GetIntValue(annotations, path.Join(keyPrefix, serviceMonitorPort))

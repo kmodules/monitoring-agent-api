@@ -6,20 +6,15 @@ require (
 	github.com/evanphx/json-patch v4.9.0+incompatible
 	github.com/go-openapi/spec v0.19.5
 	github.com/gogo/protobuf v1.3.2
-	github.com/imdario/mergo v0.3.6 // indirect
 	github.com/json-iterator/go v1.1.10
-	github.com/onsi/gomega v1.8.1 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.47.0
 	github.com/prometheus-operator/prometheus-operator/pkg/client v0.47.0
-	gomodules.xyz/pointer v0.0.0-20201105071923-daf60fa55209 // indirect
-	google.golang.org/appengine v1.6.5 // indirect
 	k8s.io/api v0.21.0
 	k8s.io/apimachinery v0.21.0
 	k8s.io/client-go v0.21.0
 	k8s.io/klog/v2 v2.8.0
 	k8s.io/kube-openapi v0.0.0-20210305001622-591a79e4bda7
-	k8s.io/utils v0.0.0-20210111153108-fddb29f9d009 // indirect
 	kmodules.xyz/client-go v0.0.0-20210504024435-1eb80721e9b8
 )
 

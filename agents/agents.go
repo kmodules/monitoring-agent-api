@@ -39,13 +39,3 @@ func New(at api.AgentType, k8sClient kubernetes.Interface, promClient prom.Monit
 	}
 	return nil, fmt.Errorf("unknown agent type %s", at)
 }
-
-func IsKnownAgentType(at api.AgentType) bool {
-	switch at {
-	case api.AgentPrometheus,
-		api.AgentPrometheusOperator,
-		api.AgentPrometheusBuiltin:
-		return true
-	}
-	return false
-}

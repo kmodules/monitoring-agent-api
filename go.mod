@@ -15,7 +15,7 @@ require (
 	k8s.io/client-go v0.21.1
 	k8s.io/klog/v2 v2.8.0
 	k8s.io/kube-openapi v0.0.0-20210305001622-591a79e4bda7
-	kmodules.xyz/client-go v0.0.0-20210617233340-13d22e91512b
+	kmodules.xyz/client-go v0.0.0-20210831030638-b1d662179991
 )
 
 replace bitbucket.org/ww/goautoneg => gomodules.xyz/goautoneg v0.0.0-20120707110453-a547fc61f48d

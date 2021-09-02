@@ -115,7 +115,7 @@ clientset:
 		$(CODE_GENERATOR_IMAGE)                          \
 		deepcopy-gen                                     \
 			--go-header-file "./hack/license/go.txt"     \
-			--input-dirs "$(GO_PKG)/$(REPO)/api/v1alpha1 $(GO_PKG)/$(REPO)/api/v1" \
+			--input-dirs "$(GO_PKG)/$(REPO)/api/v1alpha1,$(GO_PKG)/$(REPO)/api/v1" \
 			--output-file-base zz_generated.deepcopy
 
 .PHONY: gen-conversion

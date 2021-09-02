@@ -20,6 +20,7 @@ BIN      := monitoring-agent-api
 
 # https://github.com/appscodelabs/gengo-builder
 CODE_GENERATOR_IMAGE ?= appscode/gengo:release-1.21
+API_GROUPS           ?= api:v1alpha1 api:v1
 
 # This version-strategy uses git tags to set the version string
 git_branch       := $(shell git rev-parse --abbrev-ref HEAD)
@@ -114,13 +115,31 @@ clientset:
 		$(CODE_GENERATOR_IMAGE)                          \
 		deepcopy-gen                                     \
 			--go-header-file "./hack/license/go.txt"     \
-			--input-dirs "$(GO_PKG)/$(REPO)/api/v1"      \
+			--input-dirs "$(GO_PKG)/$(REPO)/api/v1alpha1 $(GO_PKG)/$(REPO)/api/v1" \
 			--output-file-base zz_generated.deepcopy
+
+.PHONY: gen-conversion
+gen-conversion:
+	rm -rf ./api/v1alpha1/zz_generated.conversion.go
+	@docker run --rm                                   \
+		-u $$(id -u):$$(id -g)                           \
+		-v /tmp:/.cache                                  \
+		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
+		-w $(DOCKER_REPO_ROOT)                           \
+		--env HTTP_PROXY=$(HTTP_PROXY)                   \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		$(CODE_GENERATOR_IMAGE)                          \
+		/go/bin/conversion-gen --go-header-file ./hack/license/go.txt \
+			--input-dirs $(GO_PKG)/$(REPO)/api/v1alpha1 \
+			-O zz_generated.conversion
 
 # Generate openapi schema
 .PHONY: openapi
-openapi:
-	@echo "Generating openapi schema"
+openapi: $(addprefix openapi-, $(subst :,_, $(API_GROUPS)))
+
+openapi-%:
+	@echo "Generating openapi schema for $(subst _,/,$*)"
+	@mkdir -p .config/api-rules
 	@docker run --rm	                                 \
 		-u $$(id -u):$$(id -g)                           \
 		-v /tmp:/.cache                                  \
@@ -131,13 +150,16 @@ openapi:
 		$(CODE_GENERATOR_IMAGE)                          \
 		openapi-gen                                      \
 			--v 1 --logtostderr                          \
-			--go-header-file "./hack/license/go.txt"     \
-			--input-dirs "$(GO_PKG)/$(REPO)/api/v1"      \
-			--output-package "$(GO_PKG)/$(REPO)/api/v1"  \
+			--go-header-file "./hack/license/go.txt" \
+			--input-dirs "$(GO_PKG)/$(REPO)/$(subst _,/,$*)" \
+			--output-package "$(GO_PKG)/$(REPO)/$(subst _,/,$*)" \
 			--report-filename /tmp/violation_exceptions.list
 
 .PHONY: gen-crd-protos
-gen-crd-protos:
+gen-crd-protos: $(addprefix gen-crd-protos-, $(subst :,_, $(API_GROUPS)))
+
+gen-crd-protos-%:
+	@echo "Generating protobuf for $(subst _,/,$*)"
 	@docker run --rm                                     \
 		-u $$(id -u):$$(id -g)                           \
 		-v /tmp:/.cache                                  \
@@ -151,7 +173,7 @@ gen-crd-protos:
 			--proto-import=$(DOCKER_REPO_ROOT)/vendor    \
 			--proto-import=$(DOCKER_REPO_ROOT)/third_party/protobuf \
 			--apimachinery-packages=-k8s.io/apimachinery/pkg/api/resource,-k8s.io/apimachinery/pkg/apis/meta/v1,-k8s.io/apimachinery/pkg/apis/meta/v1beta1,-k8s.io/apimachinery/pkg/runtime,-k8s.io/apimachinery/pkg/runtime/schema,-k8s.io/apimachinery/pkg/util/intstr \
-			--packages=-k8s.io/api/core/v1,kmodules.xyz/monitoring-agent-api/api/v1
+			--packages=-k8s.io/api/core/v1,kmodules.xyz/monitoring-agent-api/$(subst _,/,$*)
 
 .PHONY: gen
 gen: clientset gen-crd-protos openapi

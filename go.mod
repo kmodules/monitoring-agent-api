@@ -6,8 +6,8 @@ require (
 	github.com/evanphx/json-patch v4.11.0+incompatible
 	github.com/go-openapi/spec v0.19.5
 	github.com/gogo/protobuf v1.3.2
+	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/json-iterator/go v1.1.11
-	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.47.0
 	github.com/prometheus-operator/prometheus-operator/pkg/client v0.47.0
@@ -16,7 +16,7 @@ require (
 	k8s.io/client-go v0.21.1
 	k8s.io/klog/v2 v2.8.0
 	k8s.io/kube-openapi v0.0.0-20210305001622-591a79e4bda7
-	kmodules.xyz/client-go v0.0.0-20211110065417-091bd089a92d
+	kmodules.xyz/client-go v0.0.0-20211013093146-1fbfd52e78c9
 )
 
 replace bitbucket.org/ww/goautoneg => gomodules.xyz/goautoneg v0.0.0-20120707110453-a547fc61f48d

@@ -19,6 +19,8 @@ package v1
 import (
 	"sort"
 
+	meta_util "kmodules.xyz/client-go/meta"
+
 	jsoniter "github.com/json-iterator/go"
 	"gomodules.xyz/mergo"
 	core "k8s.io/api/core/v1"
@@ -266,6 +268,11 @@ func EnsureEnvVarDeleted(vars []core.EnvVar, name string) []core.EnvVar {
 		}
 	}
 	return vars
+}
+
+// Deprecated use meta_util.OverwriteKeys()
+func UpsertMap(maps, upsert map[string]string) map[string]string {
+	return meta_util.OverwriteKeys(maps, upsert)
 }
 
 func MergeLocalObjectReferences(l1, l2 []core.LocalObjectReference) []core.LocalObjectReference {

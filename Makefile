@@ -46,7 +46,7 @@ endif
 ### These variables should not need tweaking.
 ###
 
-SRC_PKGS := agents api parser prometheus
+SRC_PKGS := agents api client parser prometheus
 SRC_DIRS := $(SRC_PKGS) # directories which hold app source (not vendored)
 
 DOCKER_PLATFORMS := linux/amd64 linux/arm linux/arm64

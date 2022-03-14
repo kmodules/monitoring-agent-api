@@ -24,16 +24,10 @@ import (
 
 	prom_config "github.com/prometheus/common/config"
 	"k8s.io/client-go/rest"
+	appcatalog "kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1"
 )
 
-type ServiceReference struct {
-	Scheme    string
-	Name      string
-	Namespace string
-	Port      int
-}
-
-func ToPrometheusConfig(cfg *rest.Config, ref ServiceReference) (*Config, error) {
+func ToPrometheusConfig(cfg *rest.Config, ref appcatalog.ServiceReference) (*Config, error) {
 	if err := rest.LoadTLSFiles(cfg); err != nil {
 		return nil, err
 	}

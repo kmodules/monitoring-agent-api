@@ -26,14 +26,6 @@ import (
 	"k8s.io/client-go/rest"
 )
 
-var tmpDir = func() string {
-	dir, err := os.MkdirTemp("/tmp", "prometheus-*")
-	if err != nil {
-		panic(err)
-	}
-	return dir
-}()
-
 type ServiceReference struct {
 	Scheme    string
 	Name      string

@@ -128,7 +128,7 @@ func (r *ClientBuilder) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 	}
 	{
 		data, _ := json.Marshal(cfg)
-		files["prometheus.cfg"] = FileHash{
+		files["prometheus.json"] = FileHash{
 			Data: data,
 			Hash: xxh3.Hash(data),
 		}

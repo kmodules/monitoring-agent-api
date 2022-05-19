@@ -44,6 +44,9 @@ github.com/go-openapi/spec
 # github.com/go-openapi/swag v0.19.14 => github.com/go-openapi/swag v0.19.5
 ## explicit
 github.com/go-openapi/swag
+# github.com/gobuffalo/flect v0.2.5
+## explicit; go 1.13
+github.com/gobuffalo/flect
 # github.com/gogo/protobuf v1.3.2 => github.com/gogo/protobuf v1.3.2
 ## explicit; go 1.15
 github.com/gogo/protobuf/gogoproto

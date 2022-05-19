@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/evanphx/json-patch v4.12.0+incompatible
 	github.com/go-openapi/spec v0.19.8
+	github.com/gobuffalo/flect v0.2.5
 	github.com/gogo/protobuf v1.3.2
 	github.com/hexops/gotextdiff v1.0.3
 	github.com/json-iterator/go v1.1.12

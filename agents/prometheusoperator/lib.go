@@ -80,7 +80,7 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 			MatchNames: []string{sp.GetNamespace()},
 		}
 		for _, p := range svc.Spec.Ports {
-			in.Spec.Endpoints = UpsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
+			in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
 				Port:        p.Name,
 				Interval:    new.Prometheus.ServiceMonitor.Interval,
 				Path:        sp.Path(),
@@ -108,13 +108,12 @@ func (agent *PrometheusOperator) Delete(sp api.StatsAccessor) (kutil.VerbType, e
 	return kutil.VerbDeleted, nil
 }
 
-func UpsertMonitoringEndpoint(endpoints []promapi.Endpoint, newEndpoint promapi.Endpoint) []promapi.Endpoint {
+func upsertMonitoringEndpoint(endpoints []promapi.Endpoint, newEndpoint promapi.Endpoint) []promapi.Endpoint {
 	for i, endpoint := range endpoints {
 		if endpoint.Port == newEndpoint.Port {
 			endpoints[i] = newEndpoint
 			return endpoints
 		}
 	}
-	endpoints = append(endpoints, newEndpoint)
-	return endpoints
+	return append(endpoints, newEndpoint)
 }

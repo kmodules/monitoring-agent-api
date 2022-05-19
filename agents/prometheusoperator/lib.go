@@ -66,16 +66,6 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 		return kutil.VerbUnchanged, errors.New("serviceMonitor spec is empty")
 	}
 
-	var endPoints []promapi.Endpoint
-	for _, p := range svc.Spec.Ports {
-		endPoints = UpsertMonitoringEndpoints(endPoints, promapi.Endpoint{
-			Port:        p.Name,
-			Interval:    new.Prometheus.ServiceMonitor.Interval,
-			Path:        sp.Path(),
-			HonorLabels: true,
-		})
-	}
-
 	smMeta := metav1.ObjectMeta{
 		Name:      sp.ServiceMonitorName(),
 		Namespace: sp.GetNamespace(),
@@ -89,7 +79,14 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 		in.Spec.NamespaceSelector = promapi.NamespaceSelector{
 			MatchNames: []string{sp.GetNamespace()},
 		}
-		in.Spec.Endpoints = endPoints
+		for _, p := range svc.Spec.Ports {
+			in.Spec.Endpoints = UpsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
+				Port:        p.Name,
+				Interval:    new.Prometheus.ServiceMonitor.Interval,
+				Path:        sp.Path(),
+				HonorLabels: true,
+			})
+		}
 		in.Spec.Selector = metav1.LabelSelector{
 			MatchLabels: svc.Labels,
 		}
@@ -111,19 +108,13 @@ func (agent *PrometheusOperator) Delete(sp api.StatsAccessor) (kutil.VerbType, e
 	return kutil.VerbDeleted, nil
 }
 
-func UpsertMonitoringEndpoints(endpoints []promapi.Endpoint, newEndpoints ...promapi.Endpoint) []promapi.Endpoint {
-	upsert := func(newEndpoint promapi.Endpoint) {
-		for i, endpoint := range endpoints {
-			if endpoint.Port == newEndpoint.Port {
-				endpoints[i] = newEndpoint
-				return
-			}
+func UpsertMonitoringEndpoint(endpoints []promapi.Endpoint, newEndpoint promapi.Endpoint) []promapi.Endpoint {
+	for i, endpoint := range endpoints {
+		if endpoint.Port == newEndpoint.Port {
+			endpoints[i] = newEndpoint
+			return endpoints
 		}
-		endpoints = append(endpoints, newEndpoint)
 	}
-
-	for _, newEndpoint := range newEndpoints {
-		upsert(newEndpoint)
-	}
+	endpoints = append(endpoints, newEndpoint)
 	return endpoints
 }

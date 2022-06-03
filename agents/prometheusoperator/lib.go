@@ -82,7 +82,7 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 		for _, p := range svc.Spec.Ports {
 			in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
 				Port:        p.Name,
-				Interval:    new.Prometheus.ServiceMonitor.Interval,
+				Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
 				Path:        sp.Path(),
 				HonorLabels: true,
 			})

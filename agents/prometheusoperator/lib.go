@@ -85,6 +85,8 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 				Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
 				Path:        sp.Path(),
 				HonorLabels: true,
+				Scheme:      sp.Scheme(),
+				TLSConfig:   sp.TLSConfig(),
 			})
 		}
 		in.Spec.Selector = metav1.LabelSelector{

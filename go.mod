@@ -15,7 +15,7 @@ require (
 	github.com/prometheus/common v0.37.0
 	github.com/spf13/pflag v1.0.5
 	github.com/zeebo/xxh3 v1.0.2
-	go.bytebuilders.dev/license-verifier v0.12.0
+	go.bytebuilders.dev/license-verifier v0.12.1-0.20221113063237-6eb88040dd50
 	gomodules.xyz/atomic-writer v0.0.2
 	k8s.io/api v0.25.1
 	k8s.io/apimachinery v0.25.1
@@ -24,7 +24,7 @@ require (
 	k8s.io/kube-openapi v0.0.0-20220803164354-a70c9af30aea
 	kmodules.xyz/client-go v0.25.18
 	kmodules.xyz/custom-resources v0.25.0
-	sigs.k8s.io/controller-runtime v0.13.0
+	sigs.k8s.io/controller-runtime v0.13.1
 )
 
 require (
@@ -72,7 +72,7 @@ require (
 	gomodules.xyz/jsonpatch/v2 v2.2.0 // indirect
 	gomodules.xyz/mergo v0.3.13 // indirect
 	gomodules.xyz/pointer v0.1.0 // indirect
-	gomodules.xyz/sets v0.0.0-20210218105342-2efe2fb519a2 // indirect
+	gomodules.xyz/sets v0.2.1 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect

@@ -175,7 +175,7 @@ github.com/yudai/golcs
 # github.com/zeebo/xxh3 v1.0.2
 ## explicit; go 1.17
 github.com/zeebo/xxh3
-# go.bytebuilders.dev/license-verifier v0.12.0
+# go.bytebuilders.dev/license-verifier v0.12.1-0.20221113063237-6eb88040dd50
 ## explicit; go 1.18
 go.bytebuilders.dev/license-verifier/apis/licenses
 go.bytebuilders.dev/license-verifier/info
@@ -223,7 +223,7 @@ gomodules.xyz/mergo
 # gomodules.xyz/pointer v0.1.0
 ## explicit; go 1.15
 gomodules.xyz/pointer
-# gomodules.xyz/sets v0.0.0-20210218105342-2efe2fb519a2
+# gomodules.xyz/sets v0.2.1
 ## explicit; go 1.14
 gomodules.xyz/sets
 # google.golang.org/appengine v1.6.7
@@ -563,7 +563,7 @@ kmodules.xyz/client-go/meta
 kmodules.xyz/custom-resources/apis/appcatalog
 kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1
 kmodules.xyz/custom-resources/crds
-# sigs.k8s.io/controller-runtime v0.13.0
+# sigs.k8s.io/controller-runtime v0.13.1
 ## explicit; go 1.17
 sigs.k8s.io/controller-runtime
 sigs.k8s.io/controller-runtime/pkg/builder

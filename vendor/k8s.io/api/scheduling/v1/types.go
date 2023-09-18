@@ -32,11 +32,11 @@ type PriorityClass struct {
 	// Standard object's metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// The value of this priority class. This is the actual priority that pods
 	// receive when they have the name of this class in their pod spec.
-	Value int32 `json:"value" protobuf:"bytes,2,opt,name=value"`
+	Value int32 `json:"value"`
 
 	// globalDefault specifies whether this PriorityClass should be considered as
 	// the default priority for pods that do not have any priority class.
@@ -44,18 +44,18 @@ type PriorityClass struct {
 	// one PriorityClasses exists with their `globalDefault` field set to true,
 	// the smallest value of such global default PriorityClasses will be used as the default priority.
 	// +optional
-	GlobalDefault bool `json:"globalDefault,omitempty" protobuf:"bytes,3,opt,name=globalDefault"`
+	GlobalDefault bool `json:"globalDefault,omitempty"`
 
 	// description is an arbitrary string that usually provides guidelines on
 	// when this priority class should be used.
 	// +optional
-	Description string `json:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
+	Description string `json:"description,omitempty"`
 
 	// PreemptionPolicy is the Policy for preempting pods with lower priority.
 	// One of Never, PreemptLowerPriority.
 	// Defaults to PreemptLowerPriority if unset.
 	// +optional
-	PreemptionPolicy *apiv1.PreemptionPolicy `json:"preemptionPolicy,omitempty" protobuf:"bytes,5,opt,name=preemptionPolicy"`
+	PreemptionPolicy *apiv1.PreemptionPolicy `json:"preemptionPolicy,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -66,8 +66,8 @@ type PriorityClassList struct {
 	// Standard list metadata
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// items is the list of PriorityClasses
-	Items []PriorityClass `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []PriorityClass `json:"items"`
 }

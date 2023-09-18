@@ -18,11 +18,11 @@ package v1beta1
 
 // JSONSchemaProps is a JSON-Schema following Specification Draft 4 (http://json-schema.org/).
 type JSONSchemaProps struct {
-	ID          string        `json:"id,omitempty" protobuf:"bytes,1,opt,name=id"`
-	Schema      JSONSchemaURL `json:"$schema,omitempty" protobuf:"bytes,2,opt,name=schema"`
-	Ref         *string       `json:"$ref,omitempty" protobuf:"bytes,3,opt,name=ref"`
-	Description string        `json:"description,omitempty" protobuf:"bytes,4,opt,name=description"`
-	Type        string        `json:"type,omitempty" protobuf:"bytes,5,opt,name=type"`
+	ID          string        `json:"id,omitempty"`
+	Schema      JSONSchemaURL `json:"$schema,omitempty"`
+	Ref         *string       `json:"$ref,omitempty"`
+	Description string        `json:"description,omitempty"`
+	Type        string        `json:"type,omitempty"`
 
 	// format is an OpenAPI v3 format string. Unknown formats are ignored. The following formats are validated:
 	//
@@ -50,42 +50,42 @@ type JSONSchemaProps struct {
 	// - date: a date string like "2006-01-02" as defined by full-date in RFC3339
 	// - duration: a duration string like "22 ns" as parsed by Golang time.ParseDuration or compatible with Scala duration format
 	// - datetime: a date time string like "2014-12-15T19:30:20.000Z" as defined by date-time in RFC3339.
-	Format string `json:"format,omitempty" protobuf:"bytes,6,opt,name=format"`
+	Format string `json:"format,omitempty"`
 
-	Title string `json:"title,omitempty" protobuf:"bytes,7,opt,name=title"`
+	Title string `json:"title,omitempty"`
 	// default is a default value for undefined object fields.
 	// Defaulting is a beta feature under the CustomResourceDefaulting feature gate.
 	// CustomResourceDefinitions with defaults must be created using the v1 (or newer) CustomResourceDefinition API.
-	Default              *JSON                      `json:"default,omitempty" protobuf:"bytes,8,opt,name=default"`
-	Maximum              *float64                   `json:"maximum,omitempty" protobuf:"bytes,9,opt,name=maximum"`
-	ExclusiveMaximum     bool                       `json:"exclusiveMaximum,omitempty" protobuf:"bytes,10,opt,name=exclusiveMaximum"`
-	Minimum              *float64                   `json:"minimum,omitempty" protobuf:"bytes,11,opt,name=minimum"`
-	ExclusiveMinimum     bool                       `json:"exclusiveMinimum,omitempty" protobuf:"bytes,12,opt,name=exclusiveMinimum"`
-	MaxLength            *int64                     `json:"maxLength,omitempty" protobuf:"bytes,13,opt,name=maxLength"`
-	MinLength            *int64                     `json:"minLength,omitempty" protobuf:"bytes,14,opt,name=minLength"`
-	Pattern              string                     `json:"pattern,omitempty" protobuf:"bytes,15,opt,name=pattern"`
-	MaxItems             *int64                     `json:"maxItems,omitempty" protobuf:"bytes,16,opt,name=maxItems"`
-	MinItems             *int64                     `json:"minItems,omitempty" protobuf:"bytes,17,opt,name=minItems"`
-	UniqueItems          bool                       `json:"uniqueItems,omitempty" protobuf:"bytes,18,opt,name=uniqueItems"`
-	MultipleOf           *float64                   `json:"multipleOf,omitempty" protobuf:"bytes,19,opt,name=multipleOf"`
-	Enum                 []JSON                     `json:"enum,omitempty" protobuf:"bytes,20,rep,name=enum"`
-	MaxProperties        *int64                     `json:"maxProperties,omitempty" protobuf:"bytes,21,opt,name=maxProperties"`
-	MinProperties        *int64                     `json:"minProperties,omitempty" protobuf:"bytes,22,opt,name=minProperties"`
-	Required             []string                   `json:"required,omitempty" protobuf:"bytes,23,rep,name=required"`
-	Items                *JSONSchemaPropsOrArray    `json:"items,omitempty" protobuf:"bytes,24,opt,name=items"`
-	AllOf                []JSONSchemaProps          `json:"allOf,omitempty" protobuf:"bytes,25,rep,name=allOf"`
-	OneOf                []JSONSchemaProps          `json:"oneOf,omitempty" protobuf:"bytes,26,rep,name=oneOf"`
-	AnyOf                []JSONSchemaProps          `json:"anyOf,omitempty" protobuf:"bytes,27,rep,name=anyOf"`
-	Not                  *JSONSchemaProps           `json:"not,omitempty" protobuf:"bytes,28,opt,name=not"`
-	Properties           map[string]JSONSchemaProps `json:"properties,omitempty" protobuf:"bytes,29,rep,name=properties"`
-	AdditionalProperties *JSONSchemaPropsOrBool     `json:"additionalProperties,omitempty" protobuf:"bytes,30,opt,name=additionalProperties"`
-	PatternProperties    map[string]JSONSchemaProps `json:"patternProperties,omitempty" protobuf:"bytes,31,rep,name=patternProperties"`
-	Dependencies         JSONSchemaDependencies     `json:"dependencies,omitempty" protobuf:"bytes,32,opt,name=dependencies"`
-	AdditionalItems      *JSONSchemaPropsOrBool     `json:"additionalItems,omitempty" protobuf:"bytes,33,opt,name=additionalItems"`
-	Definitions          JSONSchemaDefinitions      `json:"definitions,omitempty" protobuf:"bytes,34,opt,name=definitions"`
-	ExternalDocs         *ExternalDocumentation     `json:"externalDocs,omitempty" protobuf:"bytes,35,opt,name=externalDocs"`
-	Example              *JSON                      `json:"example,omitempty" protobuf:"bytes,36,opt,name=example"`
-	Nullable             bool                       `json:"nullable,omitempty" protobuf:"bytes,37,opt,name=nullable"`
+	Default              *JSON                      `json:"default,omitempty"`
+	Maximum              *float64                   `json:"maximum,omitempty"`
+	ExclusiveMaximum     bool                       `json:"exclusiveMaximum,omitempty"`
+	Minimum              *float64                   `json:"minimum,omitempty"`
+	ExclusiveMinimum     bool                       `json:"exclusiveMinimum,omitempty"`
+	MaxLength            *int64                     `json:"maxLength,omitempty"`
+	MinLength            *int64                     `json:"minLength,omitempty"`
+	Pattern              string                     `json:"pattern,omitempty"`
+	MaxItems             *int64                     `json:"maxItems,omitempty"`
+	MinItems             *int64                     `json:"minItems,omitempty"`
+	UniqueItems          bool                       `json:"uniqueItems,omitempty"`
+	MultipleOf           *float64                   `json:"multipleOf,omitempty"`
+	Enum                 []JSON                     `json:"enum,omitempty"`
+	MaxProperties        *int64                     `json:"maxProperties,omitempty"`
+	MinProperties        *int64                     `json:"minProperties,omitempty"`
+	Required             []string                   `json:"required,omitempty"`
+	Items                *JSONSchemaPropsOrArray    `json:"items,omitempty"`
+	AllOf                []JSONSchemaProps          `json:"allOf,omitempty"`
+	OneOf                []JSONSchemaProps          `json:"oneOf,omitempty"`
+	AnyOf                []JSONSchemaProps          `json:"anyOf,omitempty"`
+	Not                  *JSONSchemaProps           `json:"not,omitempty"`
+	Properties           map[string]JSONSchemaProps `json:"properties,omitempty"`
+	AdditionalProperties *JSONSchemaPropsOrBool     `json:"additionalProperties,omitempty"`
+	PatternProperties    map[string]JSONSchemaProps `json:"patternProperties,omitempty"`
+	Dependencies         JSONSchemaDependencies     `json:"dependencies,omitempty"`
+	AdditionalItems      *JSONSchemaPropsOrBool     `json:"additionalItems,omitempty"`
+	Definitions          JSONSchemaDefinitions      `json:"definitions,omitempty"`
+	ExternalDocs         *ExternalDocumentation     `json:"externalDocs,omitempty"`
+	Example              *JSON                      `json:"example,omitempty"`
+	Nullable             bool                       `json:"nullable,omitempty"`
 
 	// x-kubernetes-preserve-unknown-fields stops the API server
 	// decoding step from pruning fields which are not specified
@@ -93,7 +93,7 @@ type JSONSchemaProps struct {
 	// but switches back to normal pruning behaviour if nested
 	// properties or additionalProperties are specified in the schema.
 	// This can either be true or undefined. False is forbidden.
-	XPreserveUnknownFields *bool `json:"x-kubernetes-preserve-unknown-fields,omitempty" protobuf:"bytes,38,opt,name=xKubernetesPreserveUnknownFields"`
+	XPreserveUnknownFields *bool `json:"x-kubernetes-preserve-unknown-fields,omitempty"`
 
 	// x-kubernetes-embedded-resource defines that the value is an
 	// embedded Kubernetes runtime.Object, with TypeMeta and
@@ -102,7 +102,7 @@ type JSONSchemaProps struct {
 	// are validated automatically. x-kubernetes-preserve-unknown-fields
 	// is allowed to be true, but does not have to be if the object
 	// is fully specified (up to kind, apiVersion, metadata).
-	XEmbeddedResource bool `json:"x-kubernetes-embedded-resource,omitempty" protobuf:"bytes,39,opt,name=xKubernetesEmbeddedResource"`
+	XEmbeddedResource bool `json:"x-kubernetes-embedded-resource,omitempty"`
 
 	// x-kubernetes-int-or-string specifies that this value is
 	// either an integer or a string. If this is true, an empty
@@ -117,7 +117,7 @@ type JSONSchemaProps struct {
 	//      - type: integer
 	//      - type: string
 	//    - ... zero or more
-	XIntOrString bool `json:"x-kubernetes-int-or-string,omitempty" protobuf:"bytes,40,opt,name=xKubernetesIntOrString"`
+	XIntOrString bool `json:"x-kubernetes-int-or-string,omitempty"`
 
 	// x-kubernetes-list-map-keys annotates an array with the x-kubernetes-list-type `map` by specifying the keys used
 	// as the index of the map.
@@ -130,7 +130,7 @@ type JSONSchemaProps struct {
 	// to ensure those properties are present for all list items.
 	//
 	// +optional
-	XListMapKeys []string `json:"x-kubernetes-list-map-keys,omitempty" protobuf:"bytes,41,rep,name=xKubernetesListMapKeys"`
+	XListMapKeys []string `json:"x-kubernetes-list-map-keys,omitempty"`
 
 	// x-kubernetes-list-type annotates an array to further describe its topology.
 	// This extension must only be used on lists and may have 3 possible values:
@@ -148,7 +148,7 @@ type JSONSchemaProps struct {
 	//      must only be used on a list with elements of type object.
 	// Defaults to atomic for arrays.
 	// +optional
-	XListType *string `json:"x-kubernetes-list-type,omitempty" protobuf:"bytes,42,opt,name=xKubernetesListType"`
+	XListType *string `json:"x-kubernetes-list-type,omitempty"`
 
 	// x-kubernetes-map-type annotates an object to further describe its topology.
 	// This extension must only be used when type is object and may have 2 possible values:
@@ -160,7 +160,7 @@ type JSONSchemaProps struct {
 	// 2) `atomic`: the list is treated as a single entity, like a scalar.
 	//      Atomic maps will be entirely replaced when updated.
 	// +optional
-	XMapType *string `json:"x-kubernetes-map-type,omitempty" protobuf:"bytes,43,opt,name=xKubernetesMapType"`
+	XMapType *string `json:"x-kubernetes-map-type,omitempty"`
 
 	// x-kubernetes-validations describes a list of validation rules written in the CEL expression language.
 	// This field is an alpha-level. Using this field requires the feature gate `CustomResourceValidationExpressions` to be enabled.
@@ -168,7 +168,7 @@ type JSONSchemaProps struct {
 	// +patchStrategy=merge
 	// +listType=map
 	// +listMapKey=rule
-	XValidations ValidationRules `json:"x-kubernetes-validations,omitempty" patchStrategy:"merge" patchMergeKey:"rule" protobuf:"bytes,44,rep,name=xKubernetesValidations"`
+	XValidations ValidationRules `json:"x-kubernetes-validations,omitempty" patchStrategy:"merge" patchMergeKey:"rule"`
 }
 
 // ValidationRules describes a list of validation rules written in the CEL expression language.
@@ -229,12 +229,12 @@ type ValidationRule struct {
 	//   - 'map': `X + Y` performs a merge where the array positions of all keys in `X` are preserved but the values
 	//     are overwritten by values in `Y` when the key sets of `X` and `Y` intersect. Elements in `Y` with
 	//     non-intersecting keys are appended, retaining their partial order.
-	Rule string `json:"rule" protobuf:"bytes,1,opt,name=rule"`
+	Rule string `json:"rule"`
 	// Message represents the message displayed when validation fails. The message is required if the Rule contains
 	// line breaks. The message must not contain line breaks.
 	// If unset, the message is "failed rule: {Rule}".
 	// e.g. "must be a URL with the host matching spec.host"
-	Message string `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
+	Message string `json:"message,omitempty"`
 }
 
 // JSON represents any valid JSON value.
@@ -326,6 +326,6 @@ type JSONSchemaDefinitions map[string]JSONSchemaProps
 
 // ExternalDocumentation allows referencing an external resource for extended documentation.
 type ExternalDocumentation struct {
-	Description string `json:"description,omitempty" protobuf:"bytes,1,opt,name=description"`
-	URL         string `json:"url,omitempty" protobuf:"bytes,2,opt,name=url"`
+	Description string `json:"description,omitempty"`
+	URL         string `json:"url,omitempty"`
 }

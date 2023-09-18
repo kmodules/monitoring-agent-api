@@ -20,7 +20,7 @@ BIN      := monitoring-agent-api
 
 # https://github.com/appscodelabs/gengo-builder
 CODE_GENERATOR_IMAGE ?= ghcr.io/appscode/gengo:release-1.25
-API_GROUPS           ?= api:v1alpha1 api:v1
+API_GROUPS           ?= api:v1
 
 # This version-strategy uses git tags to set the version string
 git_branch       := $(shell git rev-parse --abbrev-ref HEAD)
@@ -59,7 +59,7 @@ ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 BASEIMAGE_PROD   ?= gcr.io/distroless/static-debian11
 BASEIMAGE_DBG    ?= debian:bullseye
 
-GO_VERSION       ?= 1.20
+GO_VERSION       ?= 1.21
 BUILD_IMAGE      ?= ghcr.io/appscode/golang-dev:$(GO_VERSION)
 
 OUTBIN = bin/$(OS)_$(ARCH)/$(BIN)
@@ -176,7 +176,7 @@ gen-crd-protos-%:
 			--packages=-k8s.io/api/core/v1,kmodules.xyz/monitoring-agent-api/$(subst _,/,$*)
 
 .PHONY: gen
-gen: clientset gen-crd-protos openapi
+gen: clientset openapi
 
 fmt: $(BUILD_DIRS)
 	@docker run                                                 \

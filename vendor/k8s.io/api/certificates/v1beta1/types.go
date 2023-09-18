@@ -34,23 +34,23 @@ import (
 type CertificateSigningRequest struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// spec contains the certificate request, and is immutable after creation.
 	// Only the request, signerName, expirationSeconds, and usages fields can be set on creation.
 	// Other fields are derived by Kubernetes and cannot be modified by users.
-	Spec CertificateSigningRequestSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
+	Spec CertificateSigningRequestSpec `json:"spec"`
 
 	// Derived information about the request.
 	// +optional
-	Status CertificateSigningRequestStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Status CertificateSigningRequestStatus `json:"status,omitempty"`
 }
 
 // CertificateSigningRequestSpec contains the certificate request.
 type CertificateSigningRequestSpec struct {
 	// Base64-encoded PKCS#10 CSR data
 	// +listType=atomic
-	Request []byte `json:"request" protobuf:"bytes,1,opt,name=request"`
+	Request []byte `json:"request"`
 
 	// Requested signer for the request. It is a qualified name in the form:
 	// `scope-hostname.io/name`.
@@ -63,7 +63,7 @@ type CertificateSigningRequestSpec struct {
 	// Distribution of trust for signers happens out of band.
 	// You can select on this field using `spec.signerName`.
 	// +optional
-	SignerName *string `json:"signerName,omitempty" protobuf:"bytes,7,opt,name=signerName"`
+	SignerName *string `json:"signerName,omitempty"`
 
 	// expirationSeconds is the requested duration of validity of the issued
 	// certificate. The certificate signer may issue a certificate with a different
@@ -85,7 +85,7 @@ type CertificateSigningRequestSpec struct {
 	// The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.
 	//
 	// +optional
-	ExpirationSeconds *int32 `json:"expirationSeconds,omitempty" protobuf:"varint,8,opt,name=expirationSeconds"`
+	ExpirationSeconds *int32 `json:"expirationSeconds,omitempty"`
 
 	// allowedUsages specifies a set of usage contexts the key will be
 	// valid for.
@@ -116,25 +116,25 @@ type CertificateSigningRequestSpec struct {
 	//  "microsoft sgc",
 	//  "netscape sgc"
 	// +listType=atomic
-	Usages []KeyUsage `json:"usages,omitempty" protobuf:"bytes,5,opt,name=usages"`
+	Usages []KeyUsage `json:"usages,omitempty"`
 
 	// Information about the requesting user.
 	// See user.Info interface for details.
 	// +optional
-	Username string `json:"username,omitempty" protobuf:"bytes,2,opt,name=username"`
+	Username string `json:"username,omitempty"`
 	// UID information about the requesting user.
 	// See user.Info interface for details.
 	// +optional
-	UID string `json:"uid,omitempty" protobuf:"bytes,3,opt,name=uid"`
+	UID string `json:"uid,omitempty"`
 	// Group information about the requesting user.
 	// See user.Info interface for details.
 	// +listType=atomic
 	// +optional
-	Groups []string `json:"groups,omitempty" protobuf:"bytes,4,rep,name=groups"`
+	Groups []string `json:"groups,omitempty"`
 	// Extra information about the requesting user.
 	// See user.Info interface for details.
 	// +optional
-	Extra map[string]ExtraValue `json:"extra,omitempty" protobuf:"bytes,6,rep,name=extra"`
+	Extra map[string]ExtraValue `json:"extra,omitempty"`
 }
 
 // Built in signerName values that are honoured by kube-controller-manager.
@@ -173,12 +173,12 @@ type CertificateSigningRequestStatus struct {
 	// +listType=map
 	// +listMapKey=type
 	// +optional
-	Conditions []CertificateSigningRequestCondition `json:"conditions,omitempty" protobuf:"bytes,1,rep,name=conditions"`
+	Conditions []CertificateSigningRequestCondition `json:"conditions,omitempty"`
 
 	// If request was approved, the controller will place the issued certificate here.
 	// +listType=atomic
 	// +optional
-	Certificate []byte `json:"certificate,omitempty" protobuf:"bytes,2,opt,name=certificate"`
+	Certificate []byte `json:"certificate,omitempty"`
 }
 
 type RequestConditionType string
@@ -192,27 +192,27 @@ const (
 
 type CertificateSigningRequestCondition struct {
 	// type of the condition. Known conditions include "Approved", "Denied", and "Failed".
-	Type RequestConditionType `json:"type" protobuf:"bytes,1,opt,name=type,casttype=RequestConditionType"`
+	Type RequestConditionType `json:"type"`
 	// Status of the condition, one of True, False, Unknown.
 	// Approved, Denied, and Failed conditions may not be "False" or "Unknown".
 	// Defaults to "True".
 	// If unset, should be treated as "True".
 	// +optional
-	Status v1.ConditionStatus `json:"status" protobuf:"bytes,6,opt,name=status,casttype=k8s.io/api/core/v1.ConditionStatus"`
+	Status v1.ConditionStatus `json:"status"`
 	// brief reason for the request state
 	// +optional
-	Reason string `json:"reason,omitempty" protobuf:"bytes,2,opt,name=reason"`
+	Reason string `json:"reason,omitempty"`
 	// human readable message with details about the request state
 	// +optional
-	Message string `json:"message,omitempty" protobuf:"bytes,3,opt,name=message"`
+	Message string `json:"message,omitempty"`
 	// timestamp for the last update to this condition
 	// +optional
-	LastUpdateTime metav1.Time `json:"lastUpdateTime,omitempty" protobuf:"bytes,4,opt,name=lastUpdateTime"`
+	LastUpdateTime metav1.Time `json:"lastUpdateTime,omitempty"`
 	// lastTransitionTime is the time the condition last transitioned from one status to another.
 	// If unset, when a new condition type is added or an existing condition's status is changed,
 	// the server defaults this to the current time.
 	// +optional
-	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty" protobuf:"bytes,5,opt,name=lastTransitionTime"`
+	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -223,9 +223,9 @@ type CertificateSigningRequestCondition struct {
 type CertificateSigningRequestList struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
-	Items []CertificateSigningRequest `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []CertificateSigningRequest `json:"items"`
 }
 
 // KeyUsages specifies valid usage contexts for keys.

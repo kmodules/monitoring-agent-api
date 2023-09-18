@@ -39,17 +39,17 @@ type VolumeAttachment struct {
 	// Standard object metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Specification of the desired attach/detach volume behavior.
 	// Populated by the Kubernetes system.
-	Spec VolumeAttachmentSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
+	Spec VolumeAttachmentSpec `json:"spec"`
 
 	// Status of the VolumeAttachment request.
 	// Populated by the entity completing the attach or detach
 	// operation, i.e. the external-attacher.
 	// +optional
-	Status VolumeAttachmentStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Status VolumeAttachmentStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -63,23 +63,23 @@ type VolumeAttachmentList struct {
 	// Standard list metadata
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// Items is the list of VolumeAttachments
-	Items []VolumeAttachment `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []VolumeAttachment `json:"items"`
 }
 
 // VolumeAttachmentSpec is the specification of a VolumeAttachment request.
 type VolumeAttachmentSpec struct {
 	// Attacher indicates the name of the volume driver that MUST handle this
 	// request. This is the name returned by GetPluginName().
-	Attacher string `json:"attacher" protobuf:"bytes,1,opt,name=attacher"`
+	Attacher string `json:"attacher"`
 
 	// Source represents the volume that should be attached.
-	Source VolumeAttachmentSource `json:"source" protobuf:"bytes,2,opt,name=source"`
+	Source VolumeAttachmentSource `json:"source"`
 
 	// The node that the volume should be attached to.
-	NodeName string `json:"nodeName" protobuf:"bytes,3,opt,name=nodeName"`
+	NodeName string `json:"nodeName"`
 }
 
 // VolumeAttachmentSource represents a volume that should be attached.
@@ -89,7 +89,7 @@ type VolumeAttachmentSpec struct {
 type VolumeAttachmentSource struct {
 	// Name of the persistent volume to attach.
 	// +optional
-	PersistentVolumeName *string `json:"persistentVolumeName,omitempty" protobuf:"bytes,1,opt,name=persistentVolumeName"`
+	PersistentVolumeName *string `json:"persistentVolumeName,omitempty"`
 
 	// inlineVolumeSpec contains all the information necessary to attach
 	// a persistent volume defined by a pod's inline VolumeSource. This field
@@ -98,7 +98,7 @@ type VolumeAttachmentSource struct {
 	// PersistentVolumeSpec. This field is alpha-level and is only
 	// honored by servers that enabled the CSIMigration feature.
 	// +optional
-	InlineVolumeSpec *v1.PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty" protobuf:"bytes,2,opt,name=inlineVolumeSpec"`
+	InlineVolumeSpec *v1.PersistentVolumeSpec `json:"inlineVolumeSpec,omitempty"`
 }
 
 // VolumeAttachmentStatus is the status of a VolumeAttachment request.
@@ -106,7 +106,7 @@ type VolumeAttachmentStatus struct {
 	// Indicates the volume is successfully attached.
 	// This field must only be set by the entity completing the attach
 	// operation, i.e. the external-attacher.
-	Attached bool `json:"attached" protobuf:"varint,1,opt,name=attached"`
+	Attached bool `json:"attached"`
 
 	// Upon successful attach, this field is populated with any
 	// information returned by the attach operation that must be passed
@@ -114,32 +114,32 @@ type VolumeAttachmentStatus struct {
 	// This field must only be set by the entity completing the attach
 	// operation, i.e. the external-attacher.
 	// +optional
-	AttachmentMetadata map[string]string `json:"attachmentMetadata,omitempty" protobuf:"bytes,2,rep,name=attachmentMetadata"`
+	AttachmentMetadata map[string]string `json:"attachmentMetadata,omitempty"`
 
 	// The last error encountered during attach operation, if any.
 	// This field must only be set by the entity completing the attach
 	// operation, i.e. the external-attacher.
 	// +optional
-	AttachError *VolumeError `json:"attachError,omitempty" protobuf:"bytes,3,opt,name=attachError,casttype=VolumeError"`
+	AttachError *VolumeError `json:"attachError,omitempty"`
 
 	// The last error encountered during detach operation, if any.
 	// This field must only be set by the entity completing the detach
 	// operation, i.e. the external-attacher.
 	// +optional
-	DetachError *VolumeError `json:"detachError,omitempty" protobuf:"bytes,4,opt,name=detachError,casttype=VolumeError"`
+	DetachError *VolumeError `json:"detachError,omitempty"`
 }
 
 // VolumeError captures an error encountered during a volume operation.
 type VolumeError struct {
 	// Time the error was encountered.
 	// +optional
-	Time metav1.Time `json:"time,omitempty" protobuf:"bytes,1,opt,name=time"`
+	Time metav1.Time `json:"time,omitempty"`
 
 	// String detailing the error encountered during Attach or Detach operation.
 	// This string maybe logged, so it should not contain sensitive
 	// information.
 	// +optional
-	Message string `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
+	Message string `json:"message,omitempty"`
 }
 
 // +genclient
@@ -184,7 +184,7 @@ type CSIStorageCapacity struct {
 	//
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// NodeTopology defines which nodes have access to the storage
 	// for which capacity was reported. If not set, the storage is
@@ -193,7 +193,7 @@ type CSIStorageCapacity struct {
 	// immutable.
 	//
 	// +optional
-	NodeTopology *metav1.LabelSelector `json:"nodeTopology,omitempty" protobuf:"bytes,2,opt,name=nodeTopology"`
+	NodeTopology *metav1.LabelSelector `json:"nodeTopology,omitempty"`
 
 	// The name of the StorageClass that the reported capacity applies to.
 	// It must meet the same requirements as the name of a StorageClass
@@ -201,7 +201,7 @@ type CSIStorageCapacity struct {
 	// the CSIStorageCapacity object is obsolete and should be removed by its
 	// creator.
 	// This field is immutable.
-	StorageClassName string `json:"storageClassName" protobuf:"bytes,3,name=storageClassName"`
+	StorageClassName string `json:"storageClassName"`
 
 	// Capacity is the value reported by the CSI driver in its GetCapacityResponse
 	// for a GetCapacityRequest with topology and parameters that match the
@@ -213,7 +213,7 @@ type CSIStorageCapacity struct {
 	// unavailable.
 	//
 	// +optional
-	Capacity *resource.Quantity `json:"capacity,omitempty" protobuf:"bytes,4,opt,name=capacity"`
+	Capacity *resource.Quantity `json:"capacity,omitempty"`
 
 	// MaximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse
 	// for a GetCapacityRequest with topology and parameters that match the
@@ -227,7 +227,7 @@ type CSIStorageCapacity struct {
 	// API is ResourceRequirements.Requests in a volume claim.
 	//
 	// +optional
-	MaximumVolumeSize *resource.Quantity `json:"maximumVolumeSize,omitempty" protobuf:"bytes,5,opt,name=maximumVolumeSize"`
+	MaximumVolumeSize *resource.Quantity `json:"maximumVolumeSize,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -241,10 +241,10 @@ type CSIStorageCapacityList struct {
 	// Standard list metadata
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// Items is the list of CSIStorageCapacity objects.
 	// +listType=map
 	// +listMapKey=name
-	Items []CSIStorageCapacity `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []CSIStorageCapacity `json:"items"`
 }

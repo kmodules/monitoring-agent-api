@@ -41,8 +41,8 @@ const (
 )
 
 type ClusterMetadata struct {
-	UID         string          `json:"uid" protobuf:"bytes,1,opt,name=uid"`
-	Name        string          `json:"name,omitempty" protobuf:"bytes,2,opt,name=name"`
-	DisplayName string          `json:"displayName,omitempty" protobuf:"bytes,3,opt,name=displayName"`
-	Provider    HostingProvider `json:"provider,omitempty" protobuf:"bytes,4,opt,name=provider,casttype=HostingProvider"`
+	UID         string          `json:"uid"`
+	Name        string          `json:"name,omitempty"`
+	DisplayName string          `json:"displayName,omitempty"`
+	Provider    HostingProvider `json:"provider,omitempty"`
 }

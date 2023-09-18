@@ -37,9 +37,9 @@ package runtime
 // +k8s:openapi-gen=true
 type TypeMeta struct {
 	// +optional
-	APIVersion string `json:"apiVersion,omitempty" yaml:"apiVersion,omitempty" protobuf:"bytes,1,opt,name=apiVersion"`
+	APIVersion string `json:"apiVersion,omitempty" yaml:"apiVersion,omitempty"`
 	// +optional
-	Kind string `json:"kind,omitempty" yaml:"kind,omitempty" protobuf:"bytes,2,opt,name=kind"`
+	Kind string `json:"kind,omitempty" yaml:"kind,omitempty"`
 }
 
 const (
@@ -102,7 +102,7 @@ type RawExtension struct {
 	// Raw is the underlying serialization of this object.
 	//
 	// TODO: Determine how to detect ContentType and ContentEncoding of 'Raw' data.
-	Raw []byte `json:"-" protobuf:"bytes,1,opt,name=raw"`
+	Raw []byte `json:"-"`
 	// Object can hold a representation of this extension - useful for working with versioned
 	// structs.
 	Object Object `json:"-"`
@@ -119,7 +119,7 @@ type RawExtension struct {
 // +protobuf=true
 // +k8s:openapi-gen=true
 type Unknown struct {
-	TypeMeta `json:",inline" protobuf:"bytes,1,opt,name=typeMeta"`
+	TypeMeta `json:",inline"`
 	// Raw will hold the complete serialized object which couldn't be matched
 	// with a registered type. Most likely, nothing should be done with this
 	// except for passing it through the system.

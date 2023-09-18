@@ -31,35 +31,35 @@ type Lease struct {
 	metav1.TypeMeta `json:",inline"`
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Specification of the Lease.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 	// +optional
-	Spec LeaseSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec LeaseSpec `json:"spec,omitempty"`
 }
 
 // LeaseSpec is a specification of a Lease.
 type LeaseSpec struct {
 	// holderIdentity contains the identity of the holder of a current lease.
 	// +optional
-	HolderIdentity *string `json:"holderIdentity,omitempty" protobuf:"bytes,1,opt,name=holderIdentity"`
+	HolderIdentity *string `json:"holderIdentity,omitempty"`
 	// leaseDurationSeconds is a duration that candidates for a lease need
 	// to wait to force acquire it. This is measure against time of last
 	// observed RenewTime.
 	// +optional
-	LeaseDurationSeconds *int32 `json:"leaseDurationSeconds,omitempty" protobuf:"varint,2,opt,name=leaseDurationSeconds"`
+	LeaseDurationSeconds *int32 `json:"leaseDurationSeconds,omitempty"`
 	// acquireTime is a time when the current lease was acquired.
 	// +optional
-	AcquireTime *metav1.MicroTime `json:"acquireTime,omitempty" protobuf:"bytes,3,opt,name=acquireTime"`
+	AcquireTime *metav1.MicroTime `json:"acquireTime,omitempty"`
 	// renewTime is a time when the current holder of a lease has last
 	// updated the lease.
 	// +optional
-	RenewTime *metav1.MicroTime `json:"renewTime,omitempty" protobuf:"bytes,4,opt,name=renewTime"`
+	RenewTime *metav1.MicroTime `json:"renewTime,omitempty"`
 	// leaseTransitions is the number of transitions of a lease between
 	// holders.
 	// +optional
-	LeaseTransitions *int32 `json:"leaseTransitions,omitempty" protobuf:"varint,5,opt,name=leaseTransitions"`
+	LeaseTransitions *int32 `json:"leaseTransitions,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -73,8 +73,8 @@ type LeaseList struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// Items is a list of schema objects.
-	Items []Lease `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []Lease `json:"items"`
 }

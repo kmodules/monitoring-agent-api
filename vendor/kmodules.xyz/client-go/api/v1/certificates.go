@@ -28,87 +28,87 @@ import (
 type TLSConfig struct {
 	// IssuerRef is a reference to a Certificate Issuer.
 	// +optional
-	IssuerRef *core.TypedLocalObjectReference `json:"issuerRef,omitempty"`
+	IssuerRef *core.TypedLocalObjectReference `json:"issuerRef,omitempty" protobuf:"bytes,1,opt,name=issuerRef"`
 
 	// Certificate provides server and/or client certificate options used by application pods.
 	// These options are passed to a cert-manager Certificate object.
 	// xref: https://github.com/jetstack/cert-manager/blob/v0.16.0/pkg/apis/certmanager/v1beta1/types_certificate.go#L82-L162
 	// +optional
-	Certificates []CertificateSpec `json:"certificates,omitempty"`
+	Certificates []CertificateSpec `json:"certificates,omitempty" protobuf:"bytes,2,rep,name=certificates"`
 }
 
 type CertificateSpec struct {
 	// Alias represents the identifier of the certificate.
-	Alias string `json:"alias"`
+	Alias string `json:"alias" protobuf:"bytes,1,opt,name=alias"`
 
 	// IssuerRef is a reference to a Certificate Issuer.
 	// +optional
-	IssuerRef *core.TypedLocalObjectReference `json:"issuerRef,omitempty"`
+	IssuerRef *core.TypedLocalObjectReference `json:"issuerRef,omitempty" protobuf:"bytes,2,opt,name=issuerRef"`
 
 	// Specifies the k8s secret name that holds the certificates.
 	// Default to <resource-name>-<cert-alias>-cert.
 	// +optional
-	SecretName string `json:"secretName,omitempty"`
+	SecretName string `json:"secretName,omitempty" protobuf:"bytes,3,opt,name=secretName"`
 
 	// Full X509 name specification (https://golang.org/pkg/crypto/x509/pkix/#Name).
 	// +optional
-	Subject *X509Subject `json:"subject,omitempty"`
+	Subject *X509Subject `json:"subject,omitempty" protobuf:"bytes,4,opt,name=subject"`
 
 	// Certificate default Duration
 	// +optional
-	Duration *metav1.Duration `json:"duration,omitempty"`
+	Duration *metav1.Duration `json:"duration,omitempty" protobuf:"bytes,5,opt,name=duration"`
 
 	// Certificate renew before expiration duration
 	// +optional
-	RenewBefore *metav1.Duration `json:"renewBefore,omitempty"`
+	RenewBefore *metav1.Duration `json:"renewBefore,omitempty" protobuf:"bytes,6,opt,name=renewBefore"`
 
 	// DNSNames is a list of subject alt names to be used on the Certificate.
 	// +optional
-	DNSNames []string `json:"dnsNames,omitempty"`
+	DNSNames []string `json:"dnsNames,omitempty" protobuf:"bytes,7,rep,name=dnsNames"`
 
 	// IPAddresses is a list of IP addresses to be used on the Certificate
 	// +optional
-	IPAddresses []string `json:"ipAddresses,omitempty"`
+	IPAddresses []string `json:"ipAddresses,omitempty" protobuf:"bytes,8,rep,name=ipAddresses"`
 
 	// URIs is a list of URI subjectAltNames to be set on the Certificate.
 	// +optional
-	URIs []string `json:"uris,omitempty"`
+	URIs []string `json:"uris,omitempty" protobuf:"bytes,9,rep,name=uris"`
 
 	// EmailAddresses is a list of email subjectAltNames to be set on the Certificate.
 	// +optional
-	EmailAddresses []string `json:"emailAddresses,omitempty"`
+	EmailAddresses []string `json:"emailAddresses,omitempty" protobuf:"bytes,10,rep,name=emailAddresses"`
 
 	// Options to control private keys used for the Certificate.
 	// +optional
-	PrivateKey *CertificatePrivateKey `json:"privateKey,omitempty"`
+	PrivateKey *CertificatePrivateKey `json:"privateKey,omitempty" protobuf:"bytes,11,opt,name=privateKey"`
 }
 
 // X509Subject Full X509 name specification
 type X509Subject struct {
 	// Organizations to be used on the Certificate.
 	// +optional
-	Organizations []string `json:"organizations,omitempty"`
+	Organizations []string `json:"organizations,omitempty" protobuf:"bytes,1,rep,name=organizations"`
 	// Countries to be used on the CertificateSpec.
 	// +optional
-	Countries []string `json:"countries,omitempty"`
+	Countries []string `json:"countries,omitempty" protobuf:"bytes,2,rep,name=countries"`
 	// Organizational Units to be used on the CertificateSpec.
 	// +optional
-	OrganizationalUnits []string `json:"organizationalUnits,omitempty"`
+	OrganizationalUnits []string `json:"organizationalUnits,omitempty" protobuf:"bytes,3,rep,name=organizationalUnits"`
 	// Cities to be used on the CertificateSpec.
 	// +optional
-	Localities []string `json:"localities,omitempty"`
+	Localities []string `json:"localities,omitempty" protobuf:"bytes,4,rep,name=localities"`
 	// State/Provinces to be used on the CertificateSpec.
 	// +optional
-	Provinces []string `json:"provinces,omitempty"`
+	Provinces []string `json:"provinces,omitempty" protobuf:"bytes,5,rep,name=provinces"`
 	// Street addresses to be used on the CertificateSpec.
 	// +optional
-	StreetAddresses []string `json:"streetAddresses,omitempty"`
+	StreetAddresses []string `json:"streetAddresses,omitempty" protobuf:"bytes,6,rep,name=streetAddresses"`
 	// Postal codes to be used on the CertificateSpec.
 	// +optional
-	PostalCodes []string `json:"postalCodes,omitempty"`
+	PostalCodes []string `json:"postalCodes,omitempty" protobuf:"bytes,7,rep,name=postalCodes"`
 	// Serial number to be used on the CertificateSpec.
 	// +optional
-	SerialNumber string `json:"serialNumber,omitempty"`
+	SerialNumber string `json:"serialNumber,omitempty" protobuf:"bytes,8,opt,name=serialNumber"`
 }
 
 // +kubebuilder:validation:Enum=PKCS1;PKCS8
@@ -138,7 +138,7 @@ type CertificatePrivateKey struct {
 	// Defaults to PKCS#1 if not specified.
 	// See here for the difference between the formats: https://stackoverflow.com/a/48960291
 	// +optional
-	Encoding PrivateKeyEncoding `json:"encoding,omitempty"`
+	Encoding PrivateKeyEncoding `json:"encoding,omitempty" protobuf:"bytes,1,opt,name=encoding,casttype=PrivateKeyEncoding"`
 }
 
 // HasCertificate returns "true" if the desired certificate provided in "aliaS" is present in the certificate list.

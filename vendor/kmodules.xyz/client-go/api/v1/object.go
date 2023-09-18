@@ -29,15 +29,15 @@ import (
 
 // TypedObjectReference represents an typed namespaced object.
 type TypedObjectReference struct {
-	APIGroup string `json:"apiGroup,omitempty"`
-	Kind     string `json:"kind,omitempty"`
+	APIGroup string `json:"apiGroup,omitempty" protobuf:"bytes,1,opt,name=apiGroup"`
+	Kind     string `json:"kind,omitempty" protobuf:"bytes,2,opt,name=kind"`
 	// Namespace of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 	// +optional
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" protobuf:"bytes,3,opt,name=namespace"`
 	// Name of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	Name string `json:"name"`
+	Name string `json:"name" protobuf:"bytes,4,opt,name=name"`
 }
 
 // ObjectReference contains enough information to let you inspect or modify the referred object.
@@ -45,10 +45,10 @@ type ObjectReference struct {
 	// Namespace of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 	// +optional
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" protobuf:"bytes,1,opt,name=namespace"`
 	// Name of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	Name string `json:"name"`
+	Name string `json:"name" protobuf:"bytes,2,opt,name=name"`
 }
 
 // WithNamespace sets the namespace if original namespace is empty.
@@ -72,10 +72,10 @@ func (ref ObjectReference) ObjectKey() client.ObjectKey {
 type OID string
 
 type ObjectID struct {
-	Group     string `json:"group,omitempty"`
-	Kind      string `json:"kind,omitempty"`
-	Namespace string `json:"namespace,omitempty"`
-	Name      string `json:"name,omitempty"`
+	Group     string `json:"group,omitempty" protobuf:"bytes,1,opt,name=group"`
+	Kind      string `json:"kind,omitempty" protobuf:"bytes,2,opt,name=kind"`
+	Namespace string `json:"namespace,omitempty" protobuf:"bytes,3,opt,name=namespace"`
+	Name      string `json:"name,omitempty" protobuf:"bytes,4,opt,name=name"`
 }
 
 func (oid *ObjectID) OID() OID {
@@ -212,8 +212,8 @@ func (oid *ObjectID) ObjectKey() client.ObjectKey {
 }
 
 type ObjectInfo struct {
-	Resource ResourceID      `json:"resource"`
-	Ref      ObjectReference `json:"ref"`
+	Resource ResourceID      `json:"resource" protobuf:"bytes,1,opt,name=resource"`
+	Ref      ObjectReference `json:"ref" protobuf:"bytes,2,opt,name=ref"`
 }
 
 // +kubebuilder:validation:Enum=authn;authz;auth_secret;backup_via;catalog;cert_issuer;config;connect_via;exposed_by;event;located_on;monitored_by;ocm_bind;offshoot;ops;placed_into;policy;recommended_for;restore_into;scaled_by;storage;view

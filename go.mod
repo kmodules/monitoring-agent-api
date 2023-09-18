@@ -17,9 +17,9 @@ require (
 	github.com/zeebo/xxh3 v1.0.2
 	go.bytebuilders.dev/license-verifier v0.13.3
 	gomodules.xyz/atomic-writer v0.0.2
-	k8s.io/api v0.25.1
+	k8s.io/api v0.25.3
 	k8s.io/apimachinery v0.25.3
-	k8s.io/client-go v0.25.1
+	k8s.io/client-go v0.25.3
 	k8s.io/klog/v2 v2.80.1
 	k8s.io/kube-openapi v0.0.0-20220803164354-a70c9af30aea
 	kmodules.xyz/client-go v0.25.33
@@ -53,6 +53,7 @@ require (
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -66,7 +67,7 @@ require (
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/oauth2 v0.5.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/term v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.0.0-20220722155302-e5dcc9cfc0b9 // indirect

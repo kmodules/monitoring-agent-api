@@ -26,14 +26,14 @@ import (
 
 // ResourceID identifies a resource
 type ResourceID struct {
-	Group   string `json:"group"`
-	Version string `json:"version,omitempty"`
+	Group   string `json:"group" protobuf:"bytes,1,opt,name=group"`
+	Version string `json:"version,omitempty" protobuf:"bytes,2,opt,name=version"`
 	// Name is the plural name of the resource to serve.  It must match the name of the CustomResourceDefinition-registration
 	// too: plural.group and it must be all lowercase.
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" protobuf:"bytes,3,opt,name=name"`
 	// Kind is the serialized kind of the resource.  It is normally CamelCase and singular.
-	Kind  string        `json:"kind,omitempty"`
-	Scope ResourceScope `json:"scope,omitempty"`
+	Kind  string        `json:"kind,omitempty" protobuf:"bytes,4,opt,name=kind"`
+	Scope ResourceScope `json:"scope,omitempty" protobuf:"bytes,5,opt,name=scope,casttype=ResourceScope"`
 }
 
 // ResourceScope is an enum defining the different scopes available to a custom resource

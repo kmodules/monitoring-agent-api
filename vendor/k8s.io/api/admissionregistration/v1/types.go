@@ -26,12 +26,12 @@ type Rule struct {
 	// APIGroups is the API groups the resources belong to. '*' is all groups.
 	// If '*' is present, the length of the slice must be one.
 	// Required.
-	APIGroups []string `json:"apiGroups,omitempty" protobuf:"bytes,1,rep,name=apiGroups"`
+	APIGroups []string `json:"apiGroups,omitempty"`
 
 	// APIVersions is the API versions the resources belong to. '*' is all versions.
 	// If '*' is present, the length of the slice must be one.
 	// Required.
-	APIVersions []string `json:"apiVersions,omitempty" protobuf:"bytes,2,rep,name=apiVersions"`
+	APIVersions []string `json:"apiVersions,omitempty"`
 
 	// Resources is a list of resources this rule applies to.
 	//
@@ -48,7 +48,7 @@ type Rule struct {
 	//
 	// Depending on the enclosing object, subresources might not be allowed.
 	// Required.
-	Resources []string `json:"resources,omitempty" protobuf:"bytes,3,rep,name=resources"`
+	Resources []string `json:"resources,omitempty"`
 
 	// scope specifies the scope of this rule.
 	// Valid values are "Cluster", "Namespaced", and "*"
@@ -60,7 +60,7 @@ type Rule struct {
 	// Default is "*".
 	//
 	// +optional
-	Scope *ScopeType `json:"scope,omitempty" protobuf:"bytes,4,rep,name=scope"`
+	Scope *ScopeType `json:"scope,omitempty"`
 }
 
 // ScopeType specifies a scope for a Rule.
@@ -126,12 +126,12 @@ type ValidatingWebhookConfiguration struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// Webhooks is a list of webhooks and the affected resources and operations.
 	// +optional
 	// +patchMergeKey=name
 	// +patchStrategy=merge
-	Webhooks []ValidatingWebhook `json:"webhooks,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,2,rep,name=Webhooks"`
+	Webhooks []ValidatingWebhook `json:"webhooks,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -142,9 +142,9 @@ type ValidatingWebhookConfigurationList struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 	// List of ValidatingWebhookConfiguration.
-	Items []ValidatingWebhookConfiguration `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []ValidatingWebhookConfiguration `json:"items"`
 }
 
 // +genclient
@@ -156,12 +156,12 @@ type MutatingWebhookConfiguration struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// Webhooks is a list of webhooks and the affected resources and operations.
 	// +optional
 	// +patchMergeKey=name
 	// +patchStrategy=merge
-	Webhooks []MutatingWebhook `json:"webhooks,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,2,rep,name=Webhooks"`
+	Webhooks []MutatingWebhook `json:"webhooks,omitempty" patchStrategy:"merge" patchMergeKey:"name"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -172,9 +172,9 @@ type MutatingWebhookConfigurationList struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 	// List of MutatingWebhookConfiguration.
-	Items []MutatingWebhookConfiguration `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []MutatingWebhookConfiguration `json:"items"`
 }
 
 // ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
@@ -184,11 +184,11 @@ type ValidatingWebhook struct {
 	// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
 	// of the organization.
 	// Required.
-	Name string `json:"name" protobuf:"bytes,1,opt,name=name"`
+	Name string `json:"name"`
 
 	// ClientConfig defines how to communicate with the hook.
 	// Required
-	ClientConfig WebhookClientConfig `json:"clientConfig" protobuf:"bytes,2,opt,name=clientConfig"`
+	ClientConfig WebhookClientConfig `json:"clientConfig"`
 
 	// Rules describes what operations on what resources/subresources the webhook cares about.
 	// The webhook cares about an operation if it matches _any_ Rule.
@@ -196,12 +196,12 @@ type ValidatingWebhook struct {
 	// from putting the cluster in a state which cannot be recovered from without completely
 	// disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called
 	// on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
-	Rules []RuleWithOperations `json:"rules,omitempty" protobuf:"bytes,3,rep,name=rules"`
+	Rules []RuleWithOperations `json:"rules,omitempty"`
 
 	// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
 	// allowed values are Ignore or Fail. Defaults to Fail.
 	// +optional
-	FailurePolicy *FailurePolicyType `json:"failurePolicy,omitempty" protobuf:"bytes,4,opt,name=failurePolicy,casttype=FailurePolicyType"`
+	FailurePolicy *FailurePolicyType `json:"failurePolicy,omitempty"`
 
 	// matchPolicy defines how the "rules" list is used to match incoming requests.
 	// Allowed values are "Exact" or "Equivalent".
@@ -218,7 +218,7 @@ type ValidatingWebhook struct {
 	//
 	// Defaults to "Equivalent"
 	// +optional
-	MatchPolicy *MatchPolicyType `json:"matchPolicy,omitempty" protobuf:"bytes,9,opt,name=matchPolicy,casttype=MatchPolicyType"`
+	MatchPolicy *MatchPolicyType `json:"matchPolicy,omitempty"`
 
 	// NamespaceSelector decides whether to run the webhook on an object based
 	// on whether the namespace for that object matches the selector. If the
@@ -264,7 +264,7 @@ type ValidatingWebhook struct {
 	//
 	// Default to the empty LabelSelector, which matches everything.
 	// +optional
-	NamespaceSelector *metav1.LabelSelector `json:"namespaceSelector,omitempty" protobuf:"bytes,5,opt,name=namespaceSelector"`
+	NamespaceSelector *metav1.LabelSelector `json:"namespaceSelector,omitempty"`
 
 	// ObjectSelector decides whether to run the webhook based on if the
 	// object has matching labels. objectSelector is evaluated against both
@@ -278,7 +278,7 @@ type ValidatingWebhook struct {
 	// users may skip the admission webhook by setting the labels.
 	// Default to the empty LabelSelector, which matches everything.
 	// +optional
-	ObjectSelector *metav1.LabelSelector `json:"objectSelector,omitempty" protobuf:"bytes,10,opt,name=objectSelector"`
+	ObjectSelector *metav1.LabelSelector `json:"objectSelector,omitempty"`
 
 	// SideEffects states whether this webhook has side effects.
 	// Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown).
@@ -286,7 +286,7 @@ type ValidatingWebhook struct {
 	// rejected by a future step in the admission chain and the side effects therefore need to be undone.
 	// Requests with the dryRun attribute will be auto-rejected if they match a webhook with
 	// sideEffects == Unknown or Some.
-	SideEffects *SideEffectClass `json:"sideEffects" protobuf:"bytes,6,opt,name=sideEffects,casttype=SideEffectClass"`
+	SideEffects *SideEffectClass `json:"sideEffects"`
 
 	// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
 	// the webhook call will be ignored or the API call will fail based on the
@@ -294,7 +294,7 @@ type ValidatingWebhook struct {
 	// The timeout value must be between 1 and 30 seconds.
 	// Default to 10 seconds.
 	// +optional
-	TimeoutSeconds *int32 `json:"timeoutSeconds,omitempty" protobuf:"varint,7,opt,name=timeoutSeconds"`
+	TimeoutSeconds *int32 `json:"timeoutSeconds,omitempty"`
 
 	// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
 	// versions the Webhook expects. API server will try to use first version in
@@ -303,7 +303,7 @@ type ValidatingWebhook struct {
 	// If a persisted webhook configuration specifies allowed versions and does not
 	// include any versions known to the API Server, calls to the webhook will fail
 	// and be subject to the failure policy.
-	AdmissionReviewVersions []string `json:"admissionReviewVersions" protobuf:"bytes,8,rep,name=admissionReviewVersions"`
+	AdmissionReviewVersions []string `json:"admissionReviewVersions"`
 }
 
 // MutatingWebhook describes an admission webhook and the resources and operations it applies to.
@@ -313,11 +313,11 @@ type MutatingWebhook struct {
 	// "imagepolicy" is the name of the webhook, and kubernetes.io is the name
 	// of the organization.
 	// Required.
-	Name string `json:"name" protobuf:"bytes,1,opt,name=name"`
+	Name string `json:"name"`
 
 	// ClientConfig defines how to communicate with the hook.
 	// Required
-	ClientConfig WebhookClientConfig `json:"clientConfig" protobuf:"bytes,2,opt,name=clientConfig"`
+	ClientConfig WebhookClientConfig `json:"clientConfig"`
 
 	// Rules describes what operations on what resources/subresources the webhook cares about.
 	// The webhook cares about an operation if it matches _any_ Rule.
@@ -325,12 +325,12 @@ type MutatingWebhook struct {
 	// from putting the cluster in a state which cannot be recovered from without completely
 	// disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called
 	// on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
-	Rules []RuleWithOperations `json:"rules,omitempty" protobuf:"bytes,3,rep,name=rules"`
+	Rules []RuleWithOperations `json:"rules,omitempty"`
 
 	// FailurePolicy defines how unrecognized errors from the admission endpoint are handled -
 	// allowed values are Ignore or Fail. Defaults to Fail.
 	// +optional
-	FailurePolicy *FailurePolicyType `json:"failurePolicy,omitempty" protobuf:"bytes,4,opt,name=failurePolicy,casttype=FailurePolicyType"`
+	FailurePolicy *FailurePolicyType `json:"failurePolicy,omitempty"`
 
 	// matchPolicy defines how the "rules" list is used to match incoming requests.
 	// Allowed values are "Exact" or "Equivalent".
@@ -347,7 +347,7 @@ type MutatingWebhook struct {
 	//
 	// Defaults to "Equivalent"
 	// +optional
-	MatchPolicy *MatchPolicyType `json:"matchPolicy,omitempty" protobuf:"bytes,9,opt,name=matchPolicy,casttype=MatchPolicyType"`
+	MatchPolicy *MatchPolicyType `json:"matchPolicy,omitempty"`
 
 	// NamespaceSelector decides whether to run the webhook on an object based
 	// on whether the namespace for that object matches the selector. If the
@@ -393,7 +393,7 @@ type MutatingWebhook struct {
 	//
 	// Default to the empty LabelSelector, which matches everything.
 	// +optional
-	NamespaceSelector *metav1.LabelSelector `json:"namespaceSelector,omitempty" protobuf:"bytes,5,opt,name=namespaceSelector"`
+	NamespaceSelector *metav1.LabelSelector `json:"namespaceSelector,omitempty"`
 
 	// ObjectSelector decides whether to run the webhook based on if the
 	// object has matching labels. objectSelector is evaluated against both
@@ -407,7 +407,7 @@ type MutatingWebhook struct {
 	// users may skip the admission webhook by setting the labels.
 	// Default to the empty LabelSelector, which matches everything.
 	// +optional
-	ObjectSelector *metav1.LabelSelector `json:"objectSelector,omitempty" protobuf:"bytes,11,opt,name=objectSelector"`
+	ObjectSelector *metav1.LabelSelector `json:"objectSelector,omitempty"`
 
 	// SideEffects states whether this webhook has side effects.
 	// Acceptable values are: None, NoneOnDryRun (webhooks created via v1beta1 may also specify Some or Unknown).
@@ -415,7 +415,7 @@ type MutatingWebhook struct {
 	// rejected by a future step in the admission chain and the side effects therefore need to be undone.
 	// Requests with the dryRun attribute will be auto-rejected if they match a webhook with
 	// sideEffects == Unknown or Some.
-	SideEffects *SideEffectClass `json:"sideEffects" protobuf:"bytes,6,opt,name=sideEffects,casttype=SideEffectClass"`
+	SideEffects *SideEffectClass `json:"sideEffects"`
 
 	// TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
 	// the webhook call will be ignored or the API call will fail based on the
@@ -423,7 +423,7 @@ type MutatingWebhook struct {
 	// The timeout value must be between 1 and 30 seconds.
 	// Default to 10 seconds.
 	// +optional
-	TimeoutSeconds *int32 `json:"timeoutSeconds,omitempty" protobuf:"varint,7,opt,name=timeoutSeconds"`
+	TimeoutSeconds *int32 `json:"timeoutSeconds,omitempty"`
 
 	// AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
 	// versions the Webhook expects. API server will try to use first version in
@@ -432,7 +432,7 @@ type MutatingWebhook struct {
 	// If a persisted webhook configuration specifies allowed versions and does not
 	// include any versions known to the API Server, calls to the webhook will fail
 	// and be subject to the failure policy.
-	AdmissionReviewVersions []string `json:"admissionReviewVersions" protobuf:"bytes,8,rep,name=admissionReviewVersions"`
+	AdmissionReviewVersions []string `json:"admissionReviewVersions"`
 
 	// reinvocationPolicy indicates whether this webhook should be called multiple times as part of a single admission evaluation.
 	// Allowed values are "Never" and "IfNeeded".
@@ -450,7 +450,7 @@ type MutatingWebhook struct {
 	//
 	// Defaults to "Never".
 	// +optional
-	ReinvocationPolicy *ReinvocationPolicyType `json:"reinvocationPolicy,omitempty" protobuf:"bytes,10,opt,name=reinvocationPolicy,casttype=ReinvocationPolicyType"`
+	ReinvocationPolicy *ReinvocationPolicyType `json:"reinvocationPolicy,omitempty"`
 }
 
 // ReinvocationPolicyType specifies what type of policy the admission hook uses.
@@ -474,10 +474,10 @@ type RuleWithOperations struct {
 	// for all of those operations and any future admission operations that are added.
 	// If '*' is present, the length of the slice must be one.
 	// Required.
-	Operations []OperationType `json:"operations,omitempty" protobuf:"bytes,1,rep,name=operations,casttype=OperationType"`
+	Operations []OperationType `json:"operations,omitempty"`
 	// Rule is embedded, it describes other criteria of the rule, like
 	// APIGroups, APIVersions, Resources, etc.
-	Rule `json:",inline" protobuf:"bytes,2,opt,name=rule"`
+	Rule `json:",inline"`
 }
 
 // OperationType specifies an operation for a request.
@@ -523,7 +523,7 @@ type WebhookClientConfig struct {
 	// allowed, either.
 	//
 	// +optional
-	URL *string `json:"url,omitempty" protobuf:"bytes,3,opt,name=url"`
+	URL *string `json:"url,omitempty"`
 
 	// `service` is a reference to the service for this webhook. Either
 	// `service` or `url` must be specified.
@@ -531,31 +531,31 @@ type WebhookClientConfig struct {
 	// If the webhook is running within the cluster, then you should use `service`.
 	//
 	// +optional
-	Service *ServiceReference `json:"service,omitempty" protobuf:"bytes,1,opt,name=service"`
+	Service *ServiceReference `json:"service,omitempty"`
 
 	// `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server certificate.
 	// If unspecified, system trust roots on the apiserver are used.
 	// +optional
-	CABundle []byte `json:"caBundle,omitempty" protobuf:"bytes,2,opt,name=caBundle"`
+	CABundle []byte `json:"caBundle,omitempty"`
 }
 
 // ServiceReference holds a reference to Service.legacy.k8s.io
 type ServiceReference struct {
 	// `namespace` is the namespace of the service.
 	// Required
-	Namespace string `json:"namespace" protobuf:"bytes,1,opt,name=namespace"`
+	Namespace string `json:"namespace"`
 	// `name` is the name of the service.
 	// Required
-	Name string `json:"name" protobuf:"bytes,2,opt,name=name"`
+	Name string `json:"name"`
 
 	// `path` is an optional URL path which will be sent in any request to
 	// this service.
 	// +optional
-	Path *string `json:"path,omitempty" protobuf:"bytes,3,opt,name=path"`
+	Path *string `json:"path,omitempty"`
 
 	// If specified, the port on the service that hosting webhook.
 	// Default to 443 for backward compatibility.
 	// `port` should be a valid port number (1-65535, inclusive).
 	// +optional
-	Port *int32 `json:"port,omitempty" protobuf:"varint,4,opt,name=port"`
+	Port *int32 `json:"port,omitempty"`
 }

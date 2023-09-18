@@ -36,7 +36,7 @@ type RuntimeClass struct {
 	metav1.TypeMeta `json:",inline"`
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Handler specifies the underlying runtime and configuration that the CRI
 	// implementation will use to handle pods of this class. The possible values
@@ -48,27 +48,27 @@ type RuntimeClass struct {
 	// in a pod.
 	// The Handler must be lowercase, conform to the DNS Label (RFC 1123) requirements,
 	// and is immutable.
-	Handler string `json:"handler" protobuf:"bytes,2,opt,name=handler"`
+	Handler string `json:"handler"`
 
 	// Overhead represents the resource overhead associated with running a pod for a
 	// given RuntimeClass. For more details, see
 	//  https://kubernetes.io/docs/concepts/scheduling-eviction/pod-overhead/
 	// +optional
-	Overhead *Overhead `json:"overhead,omitempty" protobuf:"bytes,3,opt,name=overhead"`
+	Overhead *Overhead `json:"overhead,omitempty"`
 
 	// Scheduling holds the scheduling constraints to ensure that pods running
 	// with this RuntimeClass are scheduled to nodes that support it.
 	// If scheduling is nil, this RuntimeClass is assumed to be supported by all
 	// nodes.
 	// +optional
-	Scheduling *Scheduling `json:"scheduling,omitempty" protobuf:"bytes,4,opt,name=scheduling"`
+	Scheduling *Scheduling `json:"scheduling,omitempty"`
 }
 
 // Overhead structure represents the resource overhead associated with running a pod.
 type Overhead struct {
 	// PodFixed represents the fixed resource overhead associated with running a pod.
 	// +optional
-	PodFixed corev1.ResourceList `json:"podFixed,omitempty" protobuf:"bytes,1,opt,name=podFixed,casttype=k8s.io/api/core/v1.ResourceList,castkey=k8s.io/api/core/v1.ResourceName,castvalue=k8s.io/apimachinery/pkg/api/resource.Quantity"`
+	PodFixed corev1.ResourceList `json:"podFixed,omitempty"`
 }
 
 // Scheduling specifies the scheduling constraints for nodes supporting a
@@ -81,14 +81,14 @@ type Scheduling struct {
 	// be rejected in admission.
 	// +optional
 	// +mapType=atomic
-	NodeSelector map[string]string `json:"nodeSelector,omitempty" protobuf:"bytes,1,opt,name=nodeSelector"`
+	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
 
 	// tolerations are appended (excluding duplicates) to pods running with this
 	// RuntimeClass during admission, effectively unioning the set of nodes
 	// tolerated by the pod and the RuntimeClass.
 	// +optional
 	// +listType=atomic
-	Tolerations []corev1.Toleration `json:"tolerations,omitempty" protobuf:"bytes,2,rep,name=tolerations"`
+	Tolerations []corev1.Toleration `json:"tolerations,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -99,8 +99,8 @@ type RuntimeClassList struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// Items is a list of schema objects.
-	Items []RuntimeClass `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []RuntimeClass `json:"items"`
 }

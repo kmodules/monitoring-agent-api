@@ -40,12 +40,12 @@ type ClusterCIDR struct {
 	// Standard object's metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	// Spec is the desired state of the ClusterCIDR.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
 	// +optional
-	Spec ClusterCIDRSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec ClusterCIDRSpec `json:"spec,omitempty"`
 }
 
 // ClusterCIDRSpec defines the desired state of ClusterCIDR.
@@ -54,7 +54,7 @@ type ClusterCIDRSpec struct {
 	// An empty or nil NodeSelector selects all nodes.
 	// This field is immutable.
 	// +optional
-	NodeSelector *v1.NodeSelector `json:"nodeSelector,omitempty" protobuf:"bytes,1,opt,name=nodeSelector"`
+	NodeSelector *v1.NodeSelector `json:"nodeSelector,omitempty"`
 
 	// PerNodeHostBits defines the number of host bits to be configured per node.
 	// A subnet mask determines how much of the address is used for network bits
@@ -64,19 +64,19 @@ type ClusterCIDRSpec struct {
 	// Minimum value is 4 (16 IPs).
 	// This field is immutable.
 	// +required
-	PerNodeHostBits int32 `json:"perNodeHostBits" protobuf:"varint,2,opt,name=perNodeHostBits"`
+	PerNodeHostBits int32 `json:"perNodeHostBits"`
 
 	// IPv4 defines an IPv4 IP block in CIDR notation(e.g. "10.0.0.0/8").
 	// At least one of IPv4 and IPv6 must be specified.
 	// This field is immutable.
 	// +optional
-	IPv4 string `json:"ipv4" protobuf:"bytes,3,opt,name=ipv4"`
+	IPv4 string `json:"ipv4"`
 
 	// IPv6 defines an IPv6 IP block in CIDR notation(e.g. "fd12:3456:789a:1::/64").
 	// At least one of IPv4 and IPv6 must be specified.
 	// This field is immutable.
 	// +optional
-	IPv6 string `json:"ipv6" protobuf:"bytes,4,opt,name=ipv6"`
+	IPv6 string `json:"ipv6"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -88,8 +88,8 @@ type ClusterCIDRList struct {
 	// Standard object's metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 
 	// Items is the list of ClusterCIDRs.
-	Items []ClusterCIDR `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []ClusterCIDR `json:"items"`
 }

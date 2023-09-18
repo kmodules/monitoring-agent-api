@@ -21,18 +21,18 @@ import (
 )
 
 type Lineage struct {
-	Chain      []ObjectInfo `json:"chain,omitempty" protobuf:"bytes,1,rep,name=chain"`
-	Containers []string     `json:"containers,omitempty" protobuf:"bytes,2,rep,name=containers"`
+	Chain      []ObjectInfo `json:"chain,omitempty"`
+	Containers []string     `json:"containers,omitempty"`
 }
 
 type ImageInfo struct {
-	Image           string           `json:"image" protobuf:"bytes,1,opt,name=image"`
-	Lineages        []Lineage        `json:"lineages,omitempty" protobuf:"bytes,2,rep,name=lineages"`
-	PullCredentials *PullCredentials `json:"pullCredentials,omitempty" protobuf:"bytes,3,opt,name=pullCredentials"`
+	Image           string           `json:"image"`
+	Lineages        []Lineage        `json:"lineages,omitempty"`
+	PullCredentials *PullCredentials `json:"pullCredentials,omitempty"`
 }
 
 type PullCredentials struct {
-	Namespace          string                      `json:"namespace" protobuf:"bytes,1,opt,name=namespace"`
-	ServiceAccountName string                      `json:"serviceAccountName,omitempty" protobuf:"bytes,2,opt,name=serviceAccountName"`
-	SecretRefs         []core.LocalObjectReference `json:"secretRefs,omitempty" protobuf:"bytes,3,rep,name=secretRefs"`
+	Namespace          string                      `json:"namespace"`
+	ServiceAccountName string                      `json:"serviceAccountName,omitempty"`
+	SecretRefs         []core.LocalObjectReference `json:"secretRefs,omitempty"`
 }

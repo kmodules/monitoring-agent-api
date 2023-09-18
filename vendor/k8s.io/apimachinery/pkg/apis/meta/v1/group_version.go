@@ -29,8 +29,8 @@ import (
 //
 // +protobuf.options.(gogoproto.goproto_stringer)=false
 type GroupResource struct {
-	Group    string `json:"group" protobuf:"bytes,1,opt,name=group"`
-	Resource string `json:"resource" protobuf:"bytes,2,opt,name=resource"`
+	Group    string `json:"group"`
+	Resource string `json:"resource"`
 }
 
 func (gr *GroupResource) String() string {
@@ -48,9 +48,9 @@ func (gr *GroupResource) String() string {
 //
 // +protobuf.options.(gogoproto.goproto_stringer)=false
 type GroupVersionResource struct {
-	Group    string `json:"group" protobuf:"bytes,1,opt,name=group"`
-	Version  string `json:"version" protobuf:"bytes,2,opt,name=version"`
-	Resource string `json:"resource" protobuf:"bytes,3,opt,name=resource"`
+	Group    string `json:"group"`
+	Version  string `json:"version"`
+	Resource string `json:"resource"`
 }
 
 func (gvr *GroupVersionResource) String() string {
@@ -65,8 +65,8 @@ func (gvr *GroupVersionResource) String() string {
 //
 // +protobuf.options.(gogoproto.goproto_stringer)=false
 type GroupKind struct {
-	Group string `json:"group" protobuf:"bytes,1,opt,name=group"`
-	Kind  string `json:"kind" protobuf:"bytes,2,opt,name=kind"`
+	Group string `json:"group"`
+	Kind  string `json:"kind"`
 }
 
 func (gk *GroupKind) String() string {
@@ -84,9 +84,9 @@ func (gk *GroupKind) String() string {
 //
 // +protobuf.options.(gogoproto.goproto_stringer)=false
 type GroupVersionKind struct {
-	Group   string `json:"group" protobuf:"bytes,1,opt,name=group"`
-	Version string `json:"version" protobuf:"bytes,2,opt,name=version"`
-	Kind    string `json:"kind" protobuf:"bytes,3,opt,name=kind"`
+	Group   string `json:"group"`
+	Version string `json:"version"`
+	Kind    string `json:"kind"`
 }
 
 func (gvk GroupVersionKind) String() string {
@@ -97,8 +97,8 @@ func (gvk GroupVersionKind) String() string {
 //
 // +protobuf.options.(gogoproto.goproto_stringer)=false
 type GroupVersion struct {
-	Group   string `json:"group" protobuf:"bytes,1,opt,name=group"`
-	Version string `json:"version" protobuf:"bytes,2,opt,name=version"`
+	Group   string `json:"group"`
+	Version string `json:"version"`
 }
 
 // Empty returns true if group and version are empty

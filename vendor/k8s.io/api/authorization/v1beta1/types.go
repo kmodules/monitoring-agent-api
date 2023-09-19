@@ -36,14 +36,14 @@ type SubjectAccessReview struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec holds information about the request being evaluated
-	Spec SubjectAccessReviewSpec `json:"spec"`
+	Spec SubjectAccessReviewSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status is filled in by the server and indicates whether the request is allowed or not
 	// +optional
-	Status SubjectAccessReviewStatus `json:"status,omitempty"`
+	Status SubjectAccessReviewStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // +genclient
@@ -62,14 +62,14 @@ type SelfSubjectAccessReview struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec holds information about the request being evaluated.  user and groups must be empty
-	Spec SelfSubjectAccessReviewSpec `json:"spec"`
+	Spec SelfSubjectAccessReviewSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status is filled in by the server and indicates whether the request is allowed or not
 	// +optional
-	Status SubjectAccessReviewStatus `json:"status,omitempty"`
+	Status SubjectAccessReviewStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // +genclient
@@ -87,15 +87,15 @@ type LocalSubjectAccessReview struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace
 	// you made the request against.  If empty, it is defaulted.
-	Spec SubjectAccessReviewSpec `json:"spec"`
+	Spec SubjectAccessReviewSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status is filled in by the server and indicates whether the request is allowed or not
 	// +optional
-	Status SubjectAccessReviewStatus `json:"status,omitempty"`
+	Status SubjectAccessReviewStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // ResourceAttributes includes the authorization attributes available for resource requests to the Authorizer interface
@@ -105,35 +105,35 @@ type ResourceAttributes struct {
 	// "" (empty) is empty for cluster-scoped resources
 	// "" (empty) means "all" for namespace scoped resources from a SubjectAccessReview or SelfSubjectAccessReview
 	// +optional
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" protobuf:"bytes,1,opt,name=namespace"`
 	// Verb is a kubernetes resource API verb, like: get, list, watch, create, update, delete, proxy.  "*" means all.
 	// +optional
-	Verb string `json:"verb,omitempty"`
+	Verb string `json:"verb,omitempty" protobuf:"bytes,2,opt,name=verb"`
 	// Group is the API Group of the Resource.  "*" means all.
 	// +optional
-	Group string `json:"group,omitempty"`
+	Group string `json:"group,omitempty" protobuf:"bytes,3,opt,name=group"`
 	// Version is the API Version of the Resource.  "*" means all.
 	// +optional
-	Version string `json:"version,omitempty"`
+	Version string `json:"version,omitempty" protobuf:"bytes,4,opt,name=version"`
 	// Resource is one of the existing resource types.  "*" means all.
 	// +optional
-	Resource string `json:"resource,omitempty"`
+	Resource string `json:"resource,omitempty" protobuf:"bytes,5,opt,name=resource"`
 	// Subresource is one of the existing resource types.  "" means none.
 	// +optional
-	Subresource string `json:"subresource,omitempty"`
+	Subresource string `json:"subresource,omitempty" protobuf:"bytes,6,opt,name=subresource"`
 	// Name is the name of the resource being requested for a "get" or deleted for a "delete". "" (empty) means all.
 	// +optional
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" protobuf:"bytes,7,opt,name=name"`
 }
 
 // NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface
 type NonResourceAttributes struct {
 	// Path is the URL path of the request
 	// +optional
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" protobuf:"bytes,1,opt,name=path"`
 	// Verb is the standard HTTP verb
 	// +optional
-	Verb string `json:"verb,omitempty"`
+	Verb string `json:"verb,omitempty" protobuf:"bytes,2,opt,name=verb"`
 }
 
 // SubjectAccessReviewSpec is a description of the access request.  Exactly one of ResourceAuthorizationAttributes
@@ -141,25 +141,25 @@ type NonResourceAttributes struct {
 type SubjectAccessReviewSpec struct {
 	// ResourceAuthorizationAttributes describes information for a resource access request
 	// +optional
-	ResourceAttributes *ResourceAttributes `json:"resourceAttributes,omitempty"`
+	ResourceAttributes *ResourceAttributes `json:"resourceAttributes,omitempty" protobuf:"bytes,1,opt,name=resourceAttributes"`
 	// NonResourceAttributes describes information for a non-resource access request
 	// +optional
-	NonResourceAttributes *NonResourceAttributes `json:"nonResourceAttributes,omitempty"`
+	NonResourceAttributes *NonResourceAttributes `json:"nonResourceAttributes,omitempty" protobuf:"bytes,2,opt,name=nonResourceAttributes"`
 
 	// User is the user you're testing for.
 	// If you specify "User" but not "Group", then is it interpreted as "What if User were not a member of any groups
 	// +optional
-	User string `json:"user,omitempty"`
+	User string `json:"user,omitempty" protobuf:"bytes,3,opt,name=user"`
 	// Groups is the groups you're testing for.
 	// +optional
-	Groups []string `json:"group,omitempty"`
+	Groups []string `json:"group,omitempty" protobuf:"bytes,4,rep,name=group"`
 	// Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer
 	// it needs a reflection here.
 	// +optional
-	Extra map[string]ExtraValue `json:"extra,omitempty"`
+	Extra map[string]ExtraValue `json:"extra,omitempty" protobuf:"bytes,5,rep,name=extra"`
 	// UID information about the requesting user.
 	// +optional
-	UID string `json:"uid,omitempty"`
+	UID string `json:"uid,omitempty" protobuf:"bytes,6,opt,name=uid"`
 }
 
 // ExtraValue masks the value so protobuf can generate
@@ -176,30 +176,30 @@ func (t ExtraValue) String() string {
 type SelfSubjectAccessReviewSpec struct {
 	// ResourceAuthorizationAttributes describes information for a resource access request
 	// +optional
-	ResourceAttributes *ResourceAttributes `json:"resourceAttributes,omitempty"`
+	ResourceAttributes *ResourceAttributes `json:"resourceAttributes,omitempty" protobuf:"bytes,1,opt,name=resourceAttributes"`
 	// NonResourceAttributes describes information for a non-resource access request
 	// +optional
-	NonResourceAttributes *NonResourceAttributes `json:"nonResourceAttributes,omitempty"`
+	NonResourceAttributes *NonResourceAttributes `json:"nonResourceAttributes,omitempty" protobuf:"bytes,2,opt,name=nonResourceAttributes"`
 }
 
 // SubjectAccessReviewStatus
 type SubjectAccessReviewStatus struct {
 	// Allowed is required. True if the action would be allowed, false otherwise.
-	Allowed bool `json:"allowed"`
+	Allowed bool `json:"allowed" protobuf:"varint,1,opt,name=allowed"`
 	// Denied is optional. True if the action would be denied, otherwise
 	// false. If both allowed is false and denied is false, then the
 	// authorizer has no opinion on whether to authorize the action. Denied
 	// may not be true if Allowed is true.
 	// +optional
-	Denied bool `json:"denied,omitempty"`
+	Denied bool `json:"denied,omitempty" protobuf:"varint,4,opt,name=denied"`
 	// Reason is optional.  It indicates why a request was allowed or denied.
 	// +optional
-	Reason string `json:"reason,omitempty"`
+	Reason string `json:"reason,omitempty" protobuf:"bytes,2,opt,name=reason"`
 	// EvaluationError is an indication that some error occurred during the authorization check.
 	// It is entirely possible to get an error and be able to continue determine authorization status in spite of it.
 	// For instance, RBAC can be missing a role, but enough roles are still present and bound to reason about the request.
 	// +optional
-	EvaluationError string `json:"evaluationError,omitempty"`
+	EvaluationError string `json:"evaluationError,omitempty" protobuf:"bytes,3,opt,name=evaluationError"`
 }
 
 // +genclient
@@ -221,20 +221,20 @@ type SelfSubjectRulesReview struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec holds information about the request being evaluated.
-	Spec SelfSubjectRulesReviewSpec `json:"spec"`
+	Spec SelfSubjectRulesReviewSpec `json:"spec" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status is filled in by the server and indicates the set of actions a user can perform.
 	// +optional
-	Status SubjectRulesReviewStatus `json:"status,omitempty"`
+	Status SubjectRulesReviewStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
 type SelfSubjectRulesReviewSpec struct {
 	// Namespace to evaluate rules for. Required.
-	Namespace string `json:"namespace,omitempty"`
+	Namespace string `json:"namespace,omitempty" protobuf:"bytes,1,opt,name=namespace"`
 }
 
 // SubjectRulesReviewStatus contains the result of a rules check. This check can be incomplete depending on
@@ -244,46 +244,46 @@ type SelfSubjectRulesReviewSpec struct {
 type SubjectRulesReviewStatus struct {
 	// ResourceRules is the list of actions the subject is allowed to perform on resources.
 	// The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
-	ResourceRules []ResourceRule `json:"resourceRules"`
+	ResourceRules []ResourceRule `json:"resourceRules" protobuf:"bytes,1,rep,name=resourceRules"`
 	// NonResourceRules is the list of actions the subject is allowed to perform on non-resources.
 	// The list ordering isn't significant, may contain duplicates, and possibly be incomplete.
-	NonResourceRules []NonResourceRule `json:"nonResourceRules"`
+	NonResourceRules []NonResourceRule `json:"nonResourceRules" protobuf:"bytes,2,rep,name=nonResourceRules"`
 	// Incomplete is true when the rules returned by this call are incomplete. This is most commonly
 	// encountered when an authorizer, such as an external authorizer, doesn't support rules evaluation.
-	Incomplete bool `json:"incomplete"`
+	Incomplete bool `json:"incomplete" protobuf:"bytes,3,rep,name=incomplete"`
 	// EvaluationError can appear in combination with Rules. It indicates an error occurred during
 	// rule evaluation, such as an authorizer that doesn't support rule evaluation, and that
 	// ResourceRules and/or NonResourceRules may be incomplete.
 	// +optional
-	EvaluationError string `json:"evaluationError,omitempty"`
+	EvaluationError string `json:"evaluationError,omitempty" protobuf:"bytes,4,opt,name=evaluationError"`
 }
 
 // ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering isn't significant,
 // may contain duplicates, and possibly be incomplete.
 type ResourceRule struct {
 	// Verb is a list of kubernetes resource API verbs, like: get, list, watch, create, update, delete, proxy.  "*" means all.
-	Verbs []string `json:"verbs"`
+	Verbs []string `json:"verbs" protobuf:"bytes,1,rep,name=verbs"`
 
 	// APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of
 	// the enumerated resources in any API group will be allowed.  "*" means all.
 	// +optional
-	APIGroups []string `json:"apiGroups,omitempty"`
+	APIGroups []string `json:"apiGroups,omitempty" protobuf:"bytes,2,rep,name=apiGroups"`
 	// Resources is a list of resources this rule applies to.  "*" means all in the specified apiGroups.
 	//  "*/foo" represents the subresource 'foo' for all resources in the specified apiGroups.
 	// +optional
-	Resources []string `json:"resources,omitempty"`
+	Resources []string `json:"resources,omitempty" protobuf:"bytes,3,rep,name=resources"`
 	// ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.  "*" means all.
 	// +optional
-	ResourceNames []string `json:"resourceNames,omitempty"`
+	ResourceNames []string `json:"resourceNames,omitempty" protobuf:"bytes,4,rep,name=resourceNames"`
 }
 
 // NonResourceRule holds information that describes a rule for the non-resource
 type NonResourceRule struct {
 	// Verb is a list of kubernetes non-resource API verbs, like: get, post, put, delete, patch, head, options.  "*" means all.
-	Verbs []string `json:"verbs"`
+	Verbs []string `json:"verbs" protobuf:"bytes,1,rep,name=verbs"`
 
 	// NonResourceURLs is a set of partial urls that a user should have access to.  *s are allowed, but only as the full,
 	// final step in the path.  "*" means all.
 	// +optional
-	NonResourceURLs []string `json:"nonResourceURLs,omitempty"`
+	NonResourceURLs []string `json:"nonResourceURLs,omitempty" protobuf:"bytes,2,rep,name=nonResourceURLs"`
 }

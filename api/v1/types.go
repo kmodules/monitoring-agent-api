@@ -31,6 +31,7 @@ const (
 	DefaultGrafanaKey      = "monitoring.appscode.com/is-default-grafana"
 )
 
+// +kubebuilder:validation:Enum=prometheus.io/operator;prometheus.io;prometheus.io/builtin
 type AgentType string
 
 const (

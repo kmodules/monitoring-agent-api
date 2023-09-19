@@ -65,10 +65,10 @@ type PartialObjectMetadataList struct {
 	// Standard list metadata.
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 	// +optional
-	v1.ListMeta `json:"metadata,omitempty"`
+	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,2,opt,name=metadata"`
 
 	// items contains each of the included items.
-	Items []v1.PartialObjectMetadata `json:"items"`
+	Items []v1.PartialObjectMetadata `json:"items" protobuf:"bytes,1,rep,name=items"`
 }
 
 const (

@@ -698,18 +698,18 @@ type EmbeddedPersistentVolumeClaim struct {
 	metav1.TypeMeta `json:",inline"`
 
 	// EmbeddedMetadata contains metadata relevant to an EmbeddedResource.
-	EmbeddedObjectMetadata `json:"metadata,omitempty"`
+	EmbeddedObjectMetadata `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// Spec defines the desired characteristics of a volume requested by a pod author.
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 	// +optional
-	Spec v1.PersistentVolumeClaimSpec `json:"spec,omitempty"`
+	Spec v1.PersistentVolumeClaimSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	// Status represents the current information/status of a persistent volume claim.
 	// Read-only.
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 	// +optional
-	Status v1.PersistentVolumeClaimStatus `json:"status,omitempty"`
+	Status v1.PersistentVolumeClaimStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // EmbeddedObjectMetadata contains a subset of the fields included in k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta
@@ -722,21 +722,21 @@ type EmbeddedObjectMetadata struct {
 	// Cannot be updated.
 	// More info: http://kubernetes.io/docs/user-guide/identifiers#names
 	// +optional
-	Name string `json:"name,omitempty"`
+	Name string `json:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 
 	// Map of string keys and values that can be used to organize and categorize
 	// (scope and select) objects. May match selectors of replication controllers
 	// and services.
 	// More info: http://kubernetes.io/docs/user-guide/labels
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty" protobuf:"bytes,11,rep,name=labels"`
 
 	// Annotations is an unstructured key value map stored with a resource that may be
 	// set by external tools to store and retrieve arbitrary metadata. They are not
 	// queryable and should be preserved when modifying objects.
 	// More info: http://kubernetes.io/docs/user-guide/annotations
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations,omitempty" protobuf:"bytes,12,rep,name=annotations"`
 }
 
 // QuerySpec defines the query command line flags when starting Prometheus.

@@ -22,7 +22,7 @@ require (
 	k8s.io/client-go v0.25.3
 	k8s.io/klog/v2 v2.80.1
 	k8s.io/kube-openapi v0.0.0-20220803164354-a70c9af30aea
-	kmodules.xyz/client-go v0.25.34-0.20230920051128-f758ec0276ab
+	kmodules.xyz/client-go v0.25.34
 	kmodules.xyz/custom-resources v0.25.2
 	sigs.k8s.io/controller-runtime v0.13.1
 )
@@ -65,11 +65,11 @@ require (
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/yudai/gojsondiff v1.0.0 // indirect
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
-	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/oauth2 v0.5.0 // indirect
-	golang.org/x/sys v0.6.0 // indirect
-	golang.org/x/term v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
+	golang.org/x/sys v0.12.0 // indirect
+	golang.org/x/term v0.12.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.0.0-20220722155302-e5dcc9cfc0b9 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
 	gomodules.xyz/mergo v0.3.13 // indirect

@@ -22,7 +22,7 @@ require (
 	k8s.io/client-go v0.25.3
 	k8s.io/klog/v2 v2.80.1
 	k8s.io/kube-openapi v0.0.0-20220803164354-a70c9af30aea
-	kmodules.xyz/client-go v0.25.34
+	kmodules.xyz/client-go v0.25.37
 	kmodules.xyz/custom-resources v0.25.2
 	sigs.k8s.io/controller-runtime v0.13.1
 )

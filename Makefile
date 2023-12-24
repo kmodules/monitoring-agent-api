@@ -19,7 +19,7 @@ REPO     := $(notdir $(shell pwd))
 BIN      := monitoring-agent-api
 
 # https://github.com/appscodelabs/gengo-builder
-CODE_GENERATOR_IMAGE ?= ghcr.io/appscode/gengo:release-1.25
+CODE_GENERATOR_IMAGE ?= ghcr.io/appscode/gengo:release-1.29
 API_GROUPS           ?= api:v1
 
 # This version-strategy uses git tags to set the version string

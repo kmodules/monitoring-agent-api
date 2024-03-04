@@ -80,10 +80,18 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 			MatchNames: []string{sp.GetNamespace()},
 		}
 		for _, p := range svc.Spec.Ports {
+			//in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
+			//	Port:        p.Name,
+			//	Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
+			//	Path:        sp.Path(),
+			//	HonorLabels: true,
+			//	Scheme:      sp.Scheme(),
+			//	TLSConfig:   sp.TLSConfig(),
+			//})
 			in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
 				Port:        p.Name,
 				Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
-				Path:        sp.Path(),
+				Path:        "/samples",
 				HonorLabels: true,
 				Scheme:      sp.Scheme(),
 				TLSConfig:   sp.TLSConfig(),

@@ -25,7 +25,7 @@ require (
 	k8s.io/client-go v0.30.2
 	k8s.io/klog/v2 v2.130.1
 	k8s.io/kube-openapi v0.0.0-20240620174524-b456828f718b
-	kmodules.xyz/client-go v0.30.17
+	kmodules.xyz/client-go v0.30.27
 	kmodules.xyz/custom-resources v0.30.0
 	sigs.k8s.io/controller-runtime v0.18.4
 )

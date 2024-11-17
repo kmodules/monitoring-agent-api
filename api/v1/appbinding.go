@@ -65,6 +65,7 @@ type PrometheusContext struct {
 	ClusterUID  string `json:"clusterUID"`
 	ProjectId   string `json:"projectId,omitempty"`
 	Default     bool   `json:"default"`
+	IssueToken  bool   `json:"issueToken,omitempty"`
 	ClientOrgID string `json:"clientOrgID,omitempty"`
 }
 

@@ -97,7 +97,6 @@ func TryUpdateMonitorObject(ctx context.Context, c prom.MonitoringV1Interface, m
 		klog.Errorf("Attempt %d failed to update ServiceMonitor %s/%s due to %v.", attempt, cur.Namespace, cur.Name, e2)
 		return false, nil
 	})
-
 	if err != nil {
 		err = errors.Errorf("failed to update ServiceMonitor %s/%s after %d attempts due to %v", meta.Namespace, meta.Name, attempt, err)
 	}

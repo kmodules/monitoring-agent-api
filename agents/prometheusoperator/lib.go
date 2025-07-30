@@ -87,6 +87,13 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 				HonorLabels: true,
 				Scheme:      sp.Scheme(),
 				TLSConfig:   sp.TLSConfig(),
+				RelabelConfigs: []promapi.RelabelConfig{
+					{
+						SourceLabels: []promapi.LabelName{"__meta_kubernetes_endpoint_address_target_name"},
+						TargetLabel:  "pod",
+						Action:       "replace",
+					},
+				},
 			})
 		}
 		in.Spec.Selector = metav1.LabelSelector{

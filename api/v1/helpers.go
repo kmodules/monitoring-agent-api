@@ -124,13 +124,15 @@ func (c *ConnectionSpec) ToAppBinding() (*appcatalog.AppBinding, error) {
 		},
 	}
 	if c.AuthSecret != nil {
-		app.Spec.Secret = &core.LocalObjectReference{
+		app.Spec.Secret = &appcatalog.TypedLocalObjectReference{
 			Name: c.AuthSecret.Name,
+			Kind: "Secret",
 		}
 	}
 	if c.TLSSecret != nil {
-		app.Spec.TLSSecret = &core.LocalObjectReference{
+		app.Spec.TLSSecret = &appcatalog.TypedLocalObjectReference{
 			Name: c.TLSSecret.Name,
+			Kind: "Secret",
 		}
 	}
 	return &app, nil

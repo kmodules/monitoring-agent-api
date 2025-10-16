@@ -27,7 +27,7 @@ require (
 	k8s.io/kube-openapi v0.0.0-20250304201544-e5f78fe3ede9
 	k8s.io/utils v0.0.0-20241210054802-24370beab758
 	kmodules.xyz/client-go v0.32.0
-	kmodules.xyz/custom-resources v0.32.0
+	kmodules.xyz/custom-resources v0.32.2
 	sigs.k8s.io/controller-runtime v0.20.3
 )
 

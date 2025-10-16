@@ -21,13 +21,13 @@ import (
 	"fmt"
 
 	"kmodules.xyz/client-go/policy/secomp"
+	app_api "kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1"
 	appcatalog "kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1"
 
 	"gomodules.xyz/pointer"
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/utils/ptr"
-	app_api "kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1"
 )
 
 func (agent *AgentSpec) SetDefaults() {
@@ -126,11 +126,13 @@ func (c *ConnectionSpec) ToAppBinding() (*appcatalog.AppBinding, error) {
 	}
 	if c.AuthSecret != nil {
 		app.Spec.Secret = &app_api.TypedLocalObjectReference{
+			Kind: "Secret", // It will create circular dependency, If we use Kubedb Constant .
 			Name: c.AuthSecret.Name,
 		}
 	}
 	if c.TLSSecret != nil {
 		app.Spec.TLSSecret = &app_api.TypedLocalObjectReference{
+			Kind: "Secret",
 			Name: c.TLSSecret.Name,
 		}
 	}

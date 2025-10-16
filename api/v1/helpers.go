@@ -27,6 +27,7 @@ import (
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/utils/ptr"
+	app_api "kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1"
 )
 
 func (agent *AgentSpec) SetDefaults() {
@@ -124,12 +125,12 @@ func (c *ConnectionSpec) ToAppBinding() (*appcatalog.AppBinding, error) {
 		},
 	}
 	if c.AuthSecret != nil {
-		app.Spec.Secret = &core.LocalObjectReference{
+		app.Spec.Secret = &app_api.TypedLocalObjectReference{
 			Name: c.AuthSecret.Name,
 		}
 	}
 	if c.TLSSecret != nil {
-		app.Spec.TLSSecret = &core.LocalObjectReference{
+		app.Spec.TLSSecret = &app_api.TypedLocalObjectReference{
 			Name: c.TLSSecret.Name,
 		}
 	}

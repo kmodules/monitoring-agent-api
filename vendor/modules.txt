@@ -748,7 +748,7 @@ kmodules.xyz/client-go/core/v1
 kmodules.xyz/client-go/discovery
 kmodules.xyz/client-go/meta
 kmodules.xyz/client-go/policy/secomp
-# kmodules.xyz/custom-resources v0.32.0
+# kmodules.xyz/custom-resources v0.32.2
 ## explicit; go 1.23.0
 kmodules.xyz/custom-resources/apis/appcatalog
 kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1

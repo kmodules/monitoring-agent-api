@@ -85,7 +85,7 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 				Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
 				Path:        sp.Path(),
 				HonorLabels: true,
-				Scheme:      sp.Scheme(),
+				Scheme:      func() *promapi.Scheme { s := promapi.Scheme(sp.Scheme()); return &s }(),
 				TLSConfig:   sp.TLSConfig(),
 				RelabelConfigs: []promapi.RelabelConfig{
 					{

@@ -31,11 +31,11 @@ import (
 
 var SchemeGroupVersion = schema.GroupVersion{Group: api.SchemeGroupVersion.Group, Version: api.Version}
 
-func GetGroupVersionKind(v interface{}) schema.GroupVersionKind {
+func GetGroupVersionKind(v any) schema.GroupVersionKind {
 	return SchemeGroupVersion.WithKind(meta.GetKind(v))
 }
 
-func AssignTypeKind(v interface{}) error {
+func AssignTypeKind(v any) error {
 	_, err := conversion.EnforcePtr(v)
 	if err != nil {
 		return err

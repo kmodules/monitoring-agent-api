@@ -76,25 +76,33 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 		in.Labels = meta_util.OverwriteKeys(sp.ServiceMonitorAdditionalLabels(), new.Prometheus.ServiceMonitor.Labels)
 		core_util.EnsureOwnerReference(&in.ObjectMeta, owner)
 
+		in.Spec.TargetLabels = new.Prometheus.ServiceMonitor.TargetLabels
+		in.Spec.PodTargetLabels = new.Prometheus.ServiceMonitor.PodTargetLabels
+
 		in.Spec.NamespaceSelector = promapi.NamespaceSelector{
 			MatchNames: []string{sp.GetNamespace()},
 		}
+		podLabel := promapi.RelabelConfig{
+			SourceLabels: []promapi.LabelName{"__meta_kubernetes_endpoint_address_target_name"},
+			TargetLabel:  "pod",
+			Action:       "replace",
+		}
 		for _, p := range svc.Spec.Ports {
-			in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, promapi.Endpoint{
-				Port:        p.Name,
-				Interval:    promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
-				Path:        sp.Path(),
-				HonorLabels: true,
-				Scheme:      func() *promapi.Scheme { s := promapi.Scheme(sp.Scheme()); return &s }(),
-				TLSConfig:   sp.TLSConfig(),
-				RelabelConfigs: []promapi.RelabelConfig{
-					{
-						SourceLabels: []promapi.LabelName{"__meta_kubernetes_endpoint_address_target_name"},
-						TargetLabel:  "pod",
-						Action:       "replace",
-					},
-				},
-			})
+			ep := promapi.Endpoint{
+				Port:           p.Name,
+				Interval:       promapi.Duration(new.Prometheus.ServiceMonitor.Interval),
+				Path:           sp.Path(),
+				HonorLabels:    true,
+				Scheme:         func() *promapi.Scheme { s := promapi.Scheme(sp.Scheme()); return &s }(),
+				TLSConfig:      sp.TLSConfig(),
+				RelabelConfigs: []promapi.RelabelConfig{podLabel},
+			}
+			mep := findEndpoint(new.Prometheus.ServiceMonitor.Endpoints, ep.Port)
+			if mep != nil {
+				ep.RelabelConfigs = append([]promapi.RelabelConfig{podLabel}, mep.RelabelConfigs...)
+				ep.MetricRelabelConfigs = mep.MetricRelabelConfigs
+			}
+			in.Spec.Endpoints = upsertMonitoringEndpoint(in.Spec.Endpoints, ep)
 		}
 		in.Spec.Selector = metav1.LabelSelector{
 			MatchLabels: svc.Labels,
@@ -103,6 +111,15 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 	}, metav1.PatchOptions{})
 
 	return vt, err
+}
+
+func findEndpoint(endpoints []api.Endpoint, port string) *api.Endpoint {
+	for _, ep := range endpoints {
+		if ep.Port == port {
+			return &ep
+		}
+	}
+	return nil
 }
 
 func (agent *PrometheusOperator) Delete(sp api.StatsAccessor) (kutil.VerbType, error) {

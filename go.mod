@@ -2,8 +2,6 @@ module kmodules.xyz/monitoring-agent-api
 
 go 1.24.0
 
-toolchain go1.24.1
-
 require (
 	github.com/evanphx/json-patch v5.9.11+incompatible
 	github.com/gobuffalo/flect v1.0.3
@@ -27,7 +25,7 @@ require (
 	k8s.io/kube-openapi v0.0.0-20250910181357-589584f1c912
 	k8s.io/utils v0.0.0-20251002143259-bc988d571ff4
 	kmodules.xyz/client-go v0.34.2
-	kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de
+	kmodules.xyz/custom-resources v0.34.0
 	sigs.k8s.io/controller-runtime v0.22.4
 )
 

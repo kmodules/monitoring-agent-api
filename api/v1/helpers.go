@@ -26,6 +26,7 @@ import (
 	"gomodules.xyz/pointer"
 	core "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/utils/ptr"
 )
 
@@ -136,4 +137,11 @@ func (c *ConnectionSpec) ToAppBinding() (*appcatalog.AppBinding, error) {
 		}
 	}
 	return &app, nil
+}
+
+func (svc ServiceSpec) Key() types.NamespacedName {
+	return types.NamespacedName{
+		Name:      svc.Name,
+		Namespace: svc.Namespace,
+	}
 }

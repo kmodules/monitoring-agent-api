@@ -774,7 +774,7 @@ kmodules.xyz/client-go/core/v1
 kmodules.xyz/client-go/discovery
 kmodules.xyz/client-go/meta
 kmodules.xyz/client-go/policy/secomp
-# kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de
+# kmodules.xyz/custom-resources v0.34.0
 ## explicit; go 1.24.0
 kmodules.xyz/custom-resources/apis/appcatalog
 kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1

@@ -1,5 +1,5 @@
-filippo.io/edwards25519 v1.1.0 h1:FNf4tywRC1HmFuKW5xopWpigGjJKiJSV0Cqo0cJWDaA=
-filippo.io/edwards25519 v1.1.0/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
+filippo.io/edwards25519 v1.1.1 h1:YpjwWWlNmGIDyXOn8zLzqiD+9TyIlPhGFG96P39uBpw=
+filippo.io/edwards25519 v1.1.1/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
 github.com/Masterminds/semver/v3 v3.3.1 h1:QtNSWtVZ3nBfk8mAOu/B6v7FMJ+NHTIgUPi7rj+4nv4=
 github.com/Masterminds/semver/v3 v3.3.1/go.mod h1:4V+yj/TJE1HU9XfppCwVMZq3I84lprf4nC11bSS5beM=
 github.com/PuerkitoBio/purell v1.2.1 h1:QsZ4TjvwiMpat6gBCBxEQI0rcS9ehtkKtSpiUnd9N28=
@@ -210,8 +210,8 @@ golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5h
 golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.39.0 h1:CvCKL8MeisomCi6qNZ+wbb0DN9E5AATixKsvNtMoMFk=
-golang.org/x/sys v0.39.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
+golang.org/x/sys v0.40.0 h1:DBZZqJ2Rkml6QMQsZywtnjnnGvHza6BTfYFWY9kjEWQ=
+golang.org/x/sys v0.40.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
 golang.org/x/term v0.38.0 h1:PQ5pkm/rLO6HnxFR7N2lJHOZX6Kez5Y1gDSJla6jo7Q=
 golang.org/x/term v0.38.0/go.mod h1:bSEAKrOT1W+VSu9TSCMtoGEOUcKxOKgl3LE5QEF/xVg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
@@ -277,10 +277,10 @@ k8s.io/utils v0.0.0-20251002143259-bc988d571ff4 h1:SjGebBtkBqHFOli+05xYbK8YF1Dzk
 k8s.io/utils v0.0.0-20251002143259-bc988d571ff4/go.mod h1:OLgZIPagt7ERELqWJFomSt595RzquPNLL48iOWgYOg0=
 kmodules.xyz/apiversion v0.2.0 h1:vAQYqZFm4xu4pbB1cAdHbFEPES6EQkcR4wc06xdTOWk=
 kmodules.xyz/apiversion v0.2.0/go.mod h1:oPX8g8LvlPdPX3Yc5YvCzJHQnw3YF/X4/jdW0b1am80=
-kmodules.xyz/client-go v0.34.2 h1:2Cec+nyfj9kfbR+5KPK3AksxN6h4jSjhn/tw+Dhqggo=
-kmodules.xyz/client-go v0.34.2/go.mod h1:kQRuGMxhb+B9rVdcfBzjK+PV7oBDo+SaDiQ66u1QG+4=
-kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de h1:4QiA9uZiJVp6YfrVeKukeMWVaHlS55rDBaHKWLqYGyU=
-kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de/go.mod h1:pcA/n/CnrycjKCRNtU9Z+l5svhzFncLY2Kn9pqeXDVs=
+kmodules.xyz/client-go v0.34.4 h1:1WwI2iZYdGP8pD4j7dmNMDMsLha6JV4O08l/06LUtOU=
+kmodules.xyz/client-go v0.34.4/go.mod h1:myCt7AfRao4PBdUtKXu01xxbqqmLZ5U8fW0LQDaifhQ=
+kmodules.xyz/custom-resources v0.34.0 h1:ljkIYzIq0A3Awj87kkpuYqS9aifuyR3Hr9q2OVKoojM=
+kmodules.xyz/custom-resources v0.34.0/go.mod h1:pcA/n/CnrycjKCRNtU9Z+l5svhzFncLY2Kn9pqeXDVs=
 sigs.k8s.io/controller-runtime v0.22.4 h1:GEjV7KV3TY8e+tJ2LCTxUTanW4z/FmNB7l327UfMq9A=
 sigs.k8s.io/controller-runtime v0.22.4/go.mod h1:+QX1XUpTXN4mLoblf4tqr5CQcyHPAki2HLXqQMY6vh8=
 sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 h1:IpInykpT6ceI+QxKBbEflcR5EXP7sU1kvOlxwZh5txg=

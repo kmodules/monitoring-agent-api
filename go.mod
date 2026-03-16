@@ -2,8 +2,6 @@ module kmodules.xyz/monitoring-agent-api
 
 go 1.24.0
 
-toolchain go1.24.1
-
 require (
 	github.com/evanphx/json-patch v5.9.11+incompatible
 	github.com/gobuffalo/flect v1.0.3
@@ -26,13 +24,13 @@ require (
 	k8s.io/klog/v2 v2.130.1
 	k8s.io/kube-openapi v0.0.0-20250910181357-589584f1c912
 	k8s.io/utils v0.0.0-20251002143259-bc988d571ff4
-	kmodules.xyz/client-go v0.34.2
-	kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de
+	kmodules.xyz/client-go v0.34.4
+	kmodules.xyz/custom-resources v0.34.0
 	sigs.k8s.io/controller-runtime v0.22.4
 )
 
 require (
-	filippo.io/edwards25519 v1.1.0 // indirect
+	filippo.io/edwards25519 v1.1.1 // indirect
 	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/PuerkitoBio/purell v1.2.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -85,7 +83,7 @@ require (
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.31.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/term v0.38.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 	golang.org/x/time v0.13.0 // indirect

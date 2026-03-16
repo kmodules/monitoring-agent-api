@@ -1,4 +1,4 @@
-# filippo.io/edwards25519 v1.1.0
+# filippo.io/edwards25519 v1.1.1
 ## explicit; go 1.20
 filippo.io/edwards25519
 filippo.io/edwards25519/field
@@ -245,7 +245,7 @@ golang.org/x/oauth2/internal
 # golang.org/x/sync v0.19.0
 ## explicit; go 1.24.0
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.39.0
+# golang.org/x/sys v0.40.0
 ## explicit; go 1.24.0
 golang.org/x/sys/plan9
 golang.org/x/sys/unix
@@ -764,7 +764,7 @@ k8s.io/utils/trace
 # kmodules.xyz/apiversion v0.2.0
 ## explicit; go 1.14
 kmodules.xyz/apiversion
-# kmodules.xyz/client-go v0.34.2
+# kmodules.xyz/client-go v0.34.4
 ## explicit; go 1.24.0
 kmodules.xyz/client-go
 kmodules.xyz/client-go/api/v1
@@ -774,7 +774,7 @@ kmodules.xyz/client-go/core/v1
 kmodules.xyz/client-go/discovery
 kmodules.xyz/client-go/meta
 kmodules.xyz/client-go/policy/secomp
-# kmodules.xyz/custom-resources v0.32.3-0.20251226151909-e0c7e447f3de
+# kmodules.xyz/custom-resources v0.34.0
 ## explicit; go 1.24.0
 kmodules.xyz/custom-resources/apis/appcatalog
 kmodules.xyz/custom-resources/apis/appcatalog/v1alpha1

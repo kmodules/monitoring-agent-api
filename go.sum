@@ -277,8 +277,8 @@ k8s.io/utils v0.0.0-20251002143259-bc988d571ff4 h1:SjGebBtkBqHFOli+05xYbK8YF1Dzk
 k8s.io/utils v0.0.0-20251002143259-bc988d571ff4/go.mod h1:OLgZIPagt7ERELqWJFomSt595RzquPNLL48iOWgYOg0=
 kmodules.xyz/apiversion v0.2.0 h1:vAQYqZFm4xu4pbB1cAdHbFEPES6EQkcR4wc06xdTOWk=
 kmodules.xyz/apiversion v0.2.0/go.mod h1:oPX8g8LvlPdPX3Yc5YvCzJHQnw3YF/X4/jdW0b1am80=
-kmodules.xyz/client-go v0.34.4 h1:1WwI2iZYdGP8pD4j7dmNMDMsLha6JV4O08l/06LUtOU=
-kmodules.xyz/client-go v0.34.4/go.mod h1:myCt7AfRao4PBdUtKXu01xxbqqmLZ5U8fW0LQDaifhQ=
+kmodules.xyz/client-go v0.34.5 h1:mzhSQxKwGDXcEiUtABwqTNu5tVc3KsKc53foW5PHbT0=
+kmodules.xyz/client-go v0.34.5/go.mod h1:myCt7AfRao4PBdUtKXu01xxbqqmLZ5U8fW0LQDaifhQ=
 kmodules.xyz/custom-resources v0.34.0 h1:ljkIYzIq0A3Awj87kkpuYqS9aifuyR3Hr9q2OVKoojM=
 kmodules.xyz/custom-resources v0.34.0/go.mod h1:pcA/n/CnrycjKCRNtU9Z+l5svhzFncLY2Kn9pqeXDVs=
 sigs.k8s.io/controller-runtime v0.22.4 h1:GEjV7KV3TY8e+tJ2LCTxUTanW4z/FmNB7l327UfMq9A=

@@ -59,7 +59,8 @@ func AssignTypeKind(v any) error {
 }
 
 func addKnownTypes(s *runtime.Scheme) error {
-	s.AddKnownTypes(SchemeGroupVersion,
+	s.AddKnownTypes(
+		SchemeGroupVersion,
 		&api.Prometheus{},
 		&api.PrometheusList{},
 
@@ -70,7 +71,8 @@ func addKnownTypes(s *runtime.Scheme) error {
 		&api.AlertmanagerList{},
 	)
 
-	s.AddKnownTypes(SchemeGroupVersion,
+	s.AddKnownTypes(
+		SchemeGroupVersion,
 		&metav1.Status{},
 	)
 	metav1.AddToGroupVersion(s, SchemeGroupVersion)

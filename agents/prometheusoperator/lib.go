@@ -82,8 +82,14 @@ func (agent *PrometheusOperator) CreateOrUpdate(sp api.StatsAccessor, new *api.A
 		in.Spec.NamespaceSelector = promapi.NamespaceSelector{
 			MatchNames: []string{sp.GetNamespace()},
 		}
+		// Set pod from __meta_kubernetes_pod_name: Prometheus attaches it for both the
+		// Endpoints and the EndpointSlice discovery role. The role-specific
+		// __meta_kubernetes_endpoint_address_target_name is empty under EndpointSlice,
+		// and a replace from an empty source removes the pod label. Regex (.+) leaves
+		// pod unchanged when the target has no pod name.
 		podLabel := promapi.RelabelConfig{
-			SourceLabels: []promapi.LabelName{"__meta_kubernetes_endpoint_address_target_name"},
+			SourceLabels: []promapi.LabelName{"__meta_kubernetes_pod_name"},
+			Regex:        "(.+)",
 			TargetLabel:  "pod",
 			Action:       "replace",
 		}
